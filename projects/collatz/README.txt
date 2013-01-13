@@ -1,5 +1,5 @@
 Project #1: Collatz
-Date: Wed, 30 Jan 2013
+Date: Wed, 30 Jan 2013, 8pm
 
 Course Name:
 Unique:
