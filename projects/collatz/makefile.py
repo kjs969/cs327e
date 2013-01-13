@@ -10,6 +10,5 @@ test:
 	TestCollatz.py
 
 clean:
-	rm -f RunCollatz.pyc
-	rm -f RunCollatz.tmp
-	rm -f TestCollatz.pyc
+	rm -f *.pyc
+	rm -f *.tmp

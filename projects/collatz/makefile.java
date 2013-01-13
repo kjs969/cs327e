@@ -16,6 +16,5 @@ test: TestCollatz.class
 	java -ea TestCollatz
 
 clean:
-	rm -f RunCollatz.class
-	rm -f RunCollatz.tmp
-    rm -f TestCollatz.class
+	rm -f *.class
+	rm -f *.tmp
