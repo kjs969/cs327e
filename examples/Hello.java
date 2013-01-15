@@ -8,9 +8,6 @@ final class Hello {
 
 /*
 % javac -version
-javac 1.6.0_33
-
-% javac -version // CS machines
 javac 1.6.0_24
 */
 
