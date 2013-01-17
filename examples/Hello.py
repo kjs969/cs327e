@@ -8,21 +8,19 @@ print "Nothing to be done."
 
 """
 % python -V
-Python 2.7.2
-
-% python -V     # CS machines
 Python 2.6.5
-
-% python3 -V     # CS machines
-Python 3.1.2     # http://docs.python.org/release/3.0.1/whatsnew/3.0.html
+%
 """
 
 """
 % python Hello.py
+Nothing to be done.
+%
 
 % chmod ugo+x Hello.py
 % Hello.py
 Nothing to be done.
+%
 """
 
 """
@@ -35,6 +33,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 Nothing to be done.
 
 >>> quit()
+%
 """
 
 """
@@ -73,6 +72,7 @@ range(...)
 help> quit
 
 >>> quit()
+%
 """
 
 """
@@ -105,4 +105,5 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 
 >>> quit()
+%
 """
