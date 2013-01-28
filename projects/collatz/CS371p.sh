@@ -3,7 +3,7 @@
 project=Collatz
 zipfile=$project.zip
 
-files="$project.h $project.c++ $project.log Run$project.c++ Run$project.in Run$project.out Sphere$project.c++ Test$project.c++ Test$project.out html/index.html"
+files="$project.c++ $project.h $project.log html/index.html makefile Run$project.c++ Run$project.in Run$project.out Sphere$project.c++ Test$project.c++ Test$project.out"
 
 tempdir=verifytemp
 
