@@ -6,6 +6,12 @@ diff:
 	diff RunCollatz.out RunCollatz.tmp
 	rm RunCollatz.tmp
 
+doc:
+	pydoc -w Collatz
+
+log:
+	git log > Collatz.log
+
 test:
 	TestCollatz.py
 
