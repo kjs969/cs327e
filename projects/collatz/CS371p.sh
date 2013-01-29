@@ -1,23 +1,20 @@
 #!/bin/bash
 
-project=Collatz
-zipfile=$project.zip
-
-files="$project.c++ $project.h $project.log html/index.html makefile \
-Run$project.c++ Run$project.in Run$project.out Sphere$project.c++ \
-Test$project.c++ Test$project.out"
+files="html/index.html makefile Collatz.c++ Collatz.h Collatz.log \
+RunCollatz.c++ RunCollatz.in RunCollatz.out SphereCollatz.c++ \
+TestCollatz.c++ TestCollatz.out"
 
 tempdir=verifytemp
 
-if [ ! -e "$zipfile" ]
+if [ ! -e "Collatz.zip" ]
 then
-  echo "Error: Couldn't find $zipfile"
+  echo "Error: Couldn't find Collatz.zip"
 else
-  echo "Found $zipfile."
+  echo "Found Collatz.zip."
   [ -d $tempdir ] || mkdir $tempdir
   cd $tempdir
   echo "Extracting the archive..."
-  unzip -n ../$zipfile
+  unzip -n ../Collatz.zip
   echo "Done."
   for f in $files
   do
