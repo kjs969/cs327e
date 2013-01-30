@@ -7,6 +7,7 @@ CS327e: Quiz #4 (5 pts)
 """ ----------------------------------------------------------------------
 1. What are the SQL terms that correspond to the following Codd terms:
    relation, attribute, tuple
+   [SQL: Ch.2, Pg. 34]
    (1 pt)
 
 table, column, row
