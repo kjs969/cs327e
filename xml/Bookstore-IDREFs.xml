@@ -8,19 +8,21 @@
 <!-- xmllint 2-noout 2-valid Bookstore-DTD.xml -->
 
 <!DOCTYPE Bookstore [
-   <!ELEMENT Bookstore (Book*, Author*)>
-   <!ELEMENT Book (Title, Remark?)>
-   <!ATTLIST Book ISBN ID #REQUIRED
-                  Price CDATA #REQUIRED
-                  Authors IDREFS #REQUIRED>
-   <!ELEMENT Title (#PCDATA)>
-   <!ELEMENT Remark (#PCDATA | BookRef)*>
-   <!ELEMENT BookRef EMPTY>
-   <!ATTLIST BookRef book IDREF #REQUIRED>
-   <!ELEMENT Author (First_Name, Last_Name)>
-   <!ATTLIST Author Ident ID #REQUIRED>
+   <!ELEMENT Bookstore  (Book*, Author*)>
+   <!ELEMENT Book       (Title, Remark?)>
+   <!ELEMENT Title      (#PCDATA)>
+   <!ELEMENT Remark     (#PCDATA | BookRef)*>
+   <!ELEMENT BookRef    EMPTY>
+   <!ELEMENT Author     (First_Name, Last_Name)>
    <!ELEMENT First_Name (#PCDATA)>
-   <!ELEMENT Last_Name (#PCDATA)>
+   <!ELEMENT Last_Name  (#PCDATA)>
+
+   <!ATTLIST Book ISBN    ID     #REQUIRED
+                  Price   CDATA  #REQUIRED
+                  Authors IDREFS #REQUIRED>
+
+   <!ATTLIST BookRef book  IDREF #REQUIRED>
+   <!ATTLIST Author  Ident ID    #REQUIRED>
 ]>
 
 <Bookstore>
