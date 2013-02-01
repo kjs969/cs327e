@@ -14,6 +14,8 @@
 <!--     Change to 0 authors                                -->
 <!--     Change to 2 remarks                                -->
 
+<!-- xmllint -noout -schema Bookstore-XSD.xsd.xml Bookstore-XSD.xml -->
+
 <Bookstore>
    <Book ISBN="ISBN-0-13-713526-2" Price="100">
       <Title>A First Course in Database Systems</Title>

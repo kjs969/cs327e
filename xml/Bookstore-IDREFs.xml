@@ -5,6 +5,8 @@
 <!--   BookRef to HG                -->
 <!--   Add second BookRef in Remark -->
 
+<!-- xmllint 2-noout 2-valid Bookstore-DTD.xml -->
+
 <!DOCTYPE Bookstore [
    <!ELEMENT Bookstore (Book*, Author*)>
    <!ELEMENT Book (Title, Remark?)>
@@ -31,8 +33,8 @@
          Amazon.com says: Buy this book bundled with
          <BookRef book="ISBN-0-13-713526-2" /> - a great deal!
       </Remark>
-    </Book>
-    <Author Ident="HG">
+   </Book>
+   <Author Ident="HG">
       <First_Name>Hector</First_Name>
       <Last_Name>Garcia-Molina</Last_Name>
    </Author>

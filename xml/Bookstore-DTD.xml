@@ -6,6 +6,8 @@
 <!--   Add empty Remark                    -->
 <!--   Add Magazine, omit closing tag      -->
 
+<!-- xmllint 2-noout 2-valid Bookstore-DTD.xml -->
+
 <!DOCTYPE Bookstore [
    <!ELEMENT Bookstore (Book | Magazine)*>
    <!ELEMENT Book (Title, Authors, Remark?)>
