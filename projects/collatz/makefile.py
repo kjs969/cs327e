@@ -29,7 +29,7 @@ turnin-verify:
 	turnin --verify hychyc07 cs327epj1
 
 zip:
-	zip -r Collatz.zip README.txt makefile Collatz.html Collatz.log Collatz.py \
+	zip -r Collatz.zip makefile README.txt Collatz.html Collatz.log Collatz.py \
 	RunCollatz.in RunCollatz.out RunCollatz.py SphereCollatz.py \
 	TestCollatz.py TestCollatz.out
 

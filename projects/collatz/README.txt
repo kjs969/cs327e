@@ -1,8 +1,8 @@
 Project #1: Collatz
 Date: Wed, 30 Jan 2013, 8pm
 
-Course Name:
-Unique:
+Course Name: CS327e: Elements of Databases
+Unique: 53355
 
 First Name:
 Last Name:
