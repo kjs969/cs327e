@@ -7,7 +7,7 @@ CS327e: Quiz #7 (5 pts)
 """ ----------------------------------------------------------------------
 1. Which of the following is true about strong aggregation, also known as
    composition?
-   [UML Tutorial]
+   [UML Class Diagrams]
    (2 pts)
 
 a. filled diamond
