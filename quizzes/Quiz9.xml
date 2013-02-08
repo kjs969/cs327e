@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<!--
+CS327e: Quiz #9 (5 pts)
+-->
+
+<!--
+1. Define the DTD for the following XML.
+   (4 pts)
+-->
+
+<!DOCTYPE countries [
+   <!ELEMENT countries  (country*)>
+   <!ELEMENT country    (city | language)*>
+   <!ELEMENT city       (name, population)>
+   <!ELEMENT name       (#PCDATA)>
+   <!ELEMENT population (#PCDATA)>
+   <!ELEMENT language   (#PCDATA)>
+
+   <!ATTLIST country name       CDATA #REQUIRED
+                     population CDATA #REQUIRED
+                     area       CDATA #REQUIRED>
+
+   <!ATTLIST language percentage CDATA #REQUIRED>
+]>
+
+<countries>
+  <country name="Albania" population="3249136" area="28750"/>
+  <country name="Azerbaijan" population="7676953" area="86600">
+    <city>
+      <name>Baku</name>
+      <population>1740000</population>
+    </city>
+    <language percentage="3">Russian</language>
+    <language percentage="2">Armenian</language>
+    <language percentage="89">Azeri</language>
+  </country>
+</countries>
