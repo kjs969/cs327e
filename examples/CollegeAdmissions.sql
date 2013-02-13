@@ -88,7 +88,7 @@ select * from Student where (GPA > 3.7);
 select * from Student where (GPA > 3.7) and (sizeHS < 1000);
 
 # select[(GPA > 3.7) and (sizeHS < 1000) and (major = 'CS')](Student)
-select * from Apply   where (cName = 'Stanford') and (major = 'CS');
+select * from Apply where (cName = 'Stanford') and (major = 'CS');
 
 # project
 
@@ -98,7 +98,7 @@ select sID, decision from Apply;
 # select and project
 
 # project[sID, sName, GPA](select[GPA > 3.7](Student)
-select sID, sName,  GPA from Student where (GPA > 3.7);
+select sID, sName, GPA from Student where (GPA > 3.7);
 
 # project[sID, sName](select[GPA > 3.7](Student)
 select sID, sName from Student where (GPA > 3.7);
