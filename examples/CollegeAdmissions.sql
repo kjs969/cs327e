@@ -14,13 +14,13 @@ create table College (
 	enrollment int);
 
 create table Student (
-	sId    int,
+	sID    int,
 	sName  text,
 	GPA    float,
 	sizeHS int);
 
 create table Apply (
-	sId      int,
+	sID      int,
 	cName    text,
 	major    text,
 	decision boolean);
@@ -44,6 +44,7 @@ insert into College values ('Stanford', 'CA', 15000);
 insert into College values ('Berkeley', 'CA', 36000);
 insert into College values ('MIT',      'MA', 10000);
 insert into College values ('Cornell',  'NY', 21000);
+insert into College values ('Irene',    'NY', 21000);
 
 insert into Apply values (123, 'Stanford', 'CS',             true);
 insert into Apply values (123, 'Stanford', 'EE',             false);
@@ -65,6 +66,13 @@ insert into Apply values (765, 'Cornell',  'history',        false);
 insert into Apply values (765, 'Cornell',  'psychology',     true);
 insert into Apply values (543, 'MIT',       'CS',            false);
 
+# show
+
+show tables;
+show columns from Student;
+show columns from College;
+show columns from Apply;
+
 # select
 
 select * from College;
@@ -74,8 +82,8 @@ select * from Apply;
 # select
 
 select * from Student where (GPA > 3.7);
-select * from Student where (GPA > 3.7)    and (sizeHS < 1000);
-select * from Apply   where (cName = 'UT') and (major = 'cs');
+select * from Student where (GPA > 3.7)          and (sizeHS < 1000);
+select * from Apply   where (cName = 'Stanford') and (major = 'CS');
 
 # project
 
@@ -83,7 +91,8 @@ select sID, decision from Apply;
 
 # select and project
 
-select sID, sName from Student where (GPA > 3.7);
+select sID, sName,  GPA from Student where (GPA > 3.7);
+select sID, sName       from Student where (GPA > 3.7);
 
 # select distinct
 
@@ -92,55 +101,73 @@ select distinct major, decision from Apply;
 
 # cross join
 
-select * from
-	Student cross join Apply;
+select *
+	from Student cross join Apply;
 
-# inner join
+# inner join (theta join)
 
-select * from
-	Student inner join Apply
-	on (Student.sId = Apply.sId);
+select *
+	from Student, Apply
+	where (Student.sID = Apply.sID);
+
+select *
+	from Student inner join Apply
+	on (Student.sID = Apply.sID);
+
+select *
+	from Student inner join Apply
+	using (sID);
 
 # natural join
 
-select * from
-	Student natural join Apply;
+select *
+	from Student natural join Apply;
 
 # names and GPAs of Students with
 #   high school size > 1000,
 #   who applied to CS,
 #   and were rejected
 
-select sName, GPA
+select *
 	from Student inner join Apply
-	on (Student.sId = Apply.sId)
-	where (sizeHS > 1000) and (major = 'cs') and (decision = false);
+	    on (Student.sID = Apply.sID)
+	where (sizeHS > 1000) and (major = 'CS') and (decision = false);
 
 select sName, GPA
 	from Student natural join Apply
-	where (sizeHS > 1000) and (major = 'cs') and (decision = false);
+	where (sizeHS > 1000) and (major = 'CS') and (decision = false);
 
 # names and GPAs of Students with
 #   high school size > 1000,
 #   who applied to CS,
-#   at a College with enrollment > 20000,
 #   and were rejected
+#   at a college with enrollment > 20000,
 
-select sName, GPA from Student
-	inner join Apply   on (Student.sId   = Apply.sId)
-	inner join College on (College.cName = Apply.cName)
-	where (sizeHS   > 1000)  and (major = 'cs')       and
-		  (decision = false) and (enrollment > 20000);
+select *
+	from Student
+	    inner join Apply   on (Student.sID   = Apply.sID)
+	    inner join College on (College.cName = Apply.cName)
+	where (sizeHS     > 500)   and
+	      (major      = 'CS')  and
+	      (decision   = true)  and
+	      (enrollment > 20000);
 
-select sName, GPA from Student
-	natural join Apply
-	natural join College
-	where (sizeHS   > 1000)  and (major = 'cs')       and
-		  (decision = false) and (enrollment > 20000);
+select sName, GPA
+	from Student
+	    natural join Apply
+	    natural join College
+	where (sizeHS     > 500)   and
+	      (major      = 'CS')  and
+	      (decision   = true)  and
+	      (enrollment > 20000);
 
 # set union
 
 # list of College names and Student names
+(select cName from College)
+union
+(select sName from Student);
+
 (select cName as csName from College)
 union
 (select sName as csName from Student);
@@ -154,20 +181,26 @@ create temporary table T2 as select sName as csName from Student;
 # set difference
 
 # ids of Students who didn't Apply anywhere
-# (select sId from Student) except (select sId from Apply);
+# (select sID from Student) except (select sID from Apply);
 # MySQL doesn't support 'except'
 
-select distinct sId from Student
+select * from Student
 	where not exists
-	(select sId from Apply where (Student.sId = Apply.sId));
+	    (select sID from Apply where (Student.sID = Apply.sID));
+
+select distinct sID from Student
+	where not exists
+	    (select sID from Apply where (Student.sID = Apply.sID));
 
 # ids and names of Students who didn't Apply anywhere
 
 create temporary table T3 as
-	select distinct sId from Student
-	where not exists
-	(select sId from Apply where (Student.sId = Apply.sId));
-select sId, sName from
+	select distinct sID from Student
+	    where not exists
+	        (select sID from Apply where (Student.sID = Apply.sID));
+select * from
+	T3 natural join Student;
+select sID, sName from
 	T3 natural join Student;
 
 # set intersection
@@ -178,12 +211,14 @@ select sId, sName from
 
 select distinct cName as xName from College
 	where exists
-	(select sName from Student where (College.cName = Student.sName));
+	    (select sName from Student where (College.cName = Student.sName));
 
 create temporary table T5 as
 	select distinct cName as xName from College;
 create temporary table T6 as
 	select distinct sName as xName from Student;
+select * from
+	T5 natural join T6;
 select xName from
 	T5 natural join T6;
 
