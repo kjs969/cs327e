@@ -81,31 +81,31 @@ select * from Apply;
 
 # select
 
-\select_{GPA > 3.7}(Student)
+# \select_{GPA > 3.7}(Student)
 select * from Student where (GPA > 3.7);
 
-\select_{(GPA > 3.7) and (sizeHS < 1000)}(Student)
+# \select_{(GPA > 3.7) and (sizeHS < 1000)}(Student)
 select * from Student where (GPA > 3.7) and (sizeHS < 1000);
 
-\select_{(GPA > 3.7) and (sizeHS < 1000) and (major = 'CS')}(Student)
+# \select_{(GPA > 3.7) and (sizeHS < 1000) and (major = 'CS')}(Student)
 select * from Apply   where (cName = 'Stanford') and (major = 'CS');
 
 # project
 
-\project_{sID, decision}(Apply)
+# \project_{sID, decision}(Apply)
 select sID, decision from Apply;
 
 # select and project
 
-\project_{sID, sName, GPA}(_select{GPA > 3.7}(Student)
+# \project_{sID, sName, GPA}(_select{GPA > 3.7}(Student)
 select sID, sName,  GPA from Student where (GPA > 3.7);
 
-\project_{sID, sName}(_select{GPA > 3.7}(Student)
+# \project_{sID, sName}(_select{GPA > 3.7}(Student)
 select sID, sName from Student where (GPA > 3.7);
 
 # select distinct
 
-\project_{major, decision}(Apply)
+# \project_{major, decision}(Apply)
 select          major, decision from Apply;
 select distinct major, decision from Apply;
 
