@@ -1,0 +1,39 @@
+CS327e: Quiz #11 (5 pts)
+
+--------------------------------------------------------------------------
+Consider the following schema and write relational algebra expressions to
+answer the questions.
+
+Person(name, age, gender)      -- gender is 'male' or 'female'
+Frequents(name, pizzeria)
+Eats(name, pizza)
+Serves(pizzeria, pizza, price)
+
+Use the following syntax:
+
+\select_{<condition>}(relation)
+\project_{<attribute list>}(relation)
+
+--------------------------------------------------------------------------
+1. Find the name and age of the people that are female.
+   (1 pt)
+
+\project_{name, age}(\select_{gender = 'female'}(Person))
+
+--------------------------------------------------------------------------
+2. Find the names of the people that eat at "Pizza Hut".
+   (1 pt)
+
+\project_{name}\select_{pizzeria = 'Pizza Hut'}(Frequents)
+
+--------------------------------------------------------------------------
+3. Find the pizzas that 'Amy' eats.
+   (1 pt)
+
+\project_{pizza}\select_{name = 'Amy'}(Eats)
+
+--------------------------------------------------------------------------
+4. Find the pizzerias that charge more than $10.
+   (1 pt)
+
+\project_{pizzeria}(\select_{price > 10}(Serves))
