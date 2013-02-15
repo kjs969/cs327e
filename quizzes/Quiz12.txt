@@ -1,0 +1,10 @@
+CS327e: Quiz #12 (5 pts)
+
+--------------------------------------------------------------------------
+1. Describe the parts of the SQL Select statement in terms of relational
+   algebra operators and arguments.
+   (4 pts)
+
+select <ra project attributes>
+from <relation>
+where <ra select conditions>

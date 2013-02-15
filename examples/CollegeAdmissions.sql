@@ -193,10 +193,12 @@ union
 # using temporary tables
 
 # T1a := select[cName](College)
-create temporary table T1a as select cName as A1 from College;
+create temporary table T1a as
+	select cName as A1 from College;
 
 # T1b := select[sName](Student)
-create temporary table T1b as select sName as A1 from Student;
+create temporary table T1b as
+	select sName as A1 from Student;
 
 # T1a join T1b
 (select * from T1a) union (select * from T1b);
@@ -212,12 +214,12 @@ create temporary table T2a as
 	        (select sID from Apply where (Student.sID = Apply.sID));
 
 # T2a join Student
-select * from
-	T2a natural join Student;
+select *
+	from T2a natural join Student;
 
 # project[sID, sName](T2a join Student)
-select sID, sName from
-	T2a natural join Student;
+select sID, sName
+	from T2a natural join Student;
 
 # set intersection
 
