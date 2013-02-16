@@ -1,12 +1,16 @@
 use downing_test;
 
+# ----
 # drop
+# ----
 
 drop table if exists College;
 drop table if exists Student;
 drop table if exists Apply;
 
+# ------
 # create
+# ------
 
 create table Student (
 	sID    int,
@@ -25,7 +29,9 @@ create table College (
 	state      char(2),
 	enrollment int);
 
+# ----
 # show
+# ----
 
 show tables;
 show columns from Student;

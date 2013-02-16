@@ -1,6 +1,8 @@
 use downing_test;
 
+# ------
 # insert
+# ------
 
 insert into Student values (123, 'Amy',    3.9, 1000);
 insert into Student values (234, 'Bob',    3.6, 1500);
@@ -41,7 +43,9 @@ insert into College values ('MIT',      'MA', 10000);
 insert into College values ('Cornell',  'NY', 21000);
 insert into College values ('Irene',    'NY', 21000);
 
+# ------
 # select
+# ------
 
 select * from Student;
 select * from Apply;

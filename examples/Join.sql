@@ -1,14 +1,19 @@
 use downing_test;
 
+# ----------
 # cross join
+# ----------
 
 # Student cross Apply
 select *
 	from Student cross join Apply;
 
+# -----------------------
 # inner join (theta join)
+# -----------------------
 
 # Student join[Student.sID = Apply.sID] Apply
+
 select *
 	from Student, Apply
 	where (Student.sID = Apply.sID);
@@ -57,6 +62,9 @@ select *
 	      (decision   = true)  and
 	      (enrollment > 20000);
 
+# project[sName, GPA](
+# 	select[(sizeHS > 500) and (major = 'CS') and (decision = false) and (enrollment > 20000)]
+# 		(Student join Apply join College))
 select sName, GPA
 	from Student natural join Apply natural join College
 	where (sizeHS     > 500)   and
