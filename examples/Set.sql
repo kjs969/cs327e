@@ -28,7 +28,7 @@ create temporary table T1b as
 
 # set difference
 
-# ID and name of students who didn't apply anywhere
+# ID and name of students who did not apply anywhere
 
 # T2a := project[sID](Student) diff project[sID](Apply)
 create temporary table T2a as
