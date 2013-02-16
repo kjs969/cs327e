@@ -2,31 +2,34 @@ use downing_test;
 
 # drop
 
-drop table if exists college;
-drop table if exists student;
+drop table if exists College;
+drop table if exists Student;
+drop table if exists Apply;
 
 # create
 
-create table student (
-    id    int,
-    sname text,
-    gpa   float,
-    photo blob);
+create table Student (
+	sID    int,
+	sName  text,
+	GPA    float,
+	sizeHS int);
 
-create table college (
-    cname text,
-    state char(2),
-    enr   int);
+create table Apply (
+	sID      int,
+	cName    text,
+	major    text,
+	decision boolean);
+
+create table College (
+	cName      text,
+	state      char(2),
+	enrollment int);
 
 # show
 
 show tables;
-show columns from student;
-show columns from college;
-
-# drop
-
-drop table student;
-drop table college;
+show columns from Student;
+show columns from Apply;
+show columns from College;
 
 exit
