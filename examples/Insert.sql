@@ -41,7 +41,7 @@ insert into College values ('Stanford', 'CA', 15000);
 insert into College values ('Berkeley', 'CA', 36000);
 insert into College values ('MIT',      'MA', 10000);
 insert into College values ('Cornell',  'NY', 21000);
-insert into College values ('Irene',    'NY', 21000);
+insert into College values ('Irene',    'TX', 25000);
 
 # ------
 # select

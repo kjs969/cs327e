@@ -15,38 +15,19 @@ union
 union
 (select sName as A1 from Student);
 
-# using temporary tables
-
-# T1a := select[cName](College)
-create temporary table T1a as
-	select cName as A1 from College;
-
-# T1b := select[sName](Student)
-create temporary table T1b as
-	select sName as A1 from Student;
-
-# T1a join T1b
-(select * from T1a) union (select * from T1b);
-
 # --------------
 # set difference
 # --------------
 
 # ID and name of students who did not apply anywhere
 
-# T2a := project[sID](Student) diff project[sID](Apply)
-create temporary table T2a as
-	select distinct sID from Student
-	    where not exists
-	        (select sID from Apply where (Student.sID = Apply.sID));
-
-# T2a join Student
-select *
-	from T2a natural join Student;
-
-# project[sID, sName](T2a join Student)
+# project[sID](Student) diff project[sID](Apply)
 select sID, sName
-	from T2a natural join Student;
+	from Student
+	where not exists
+		(select *
+			from Apply
+			where Student.sID = Apply.sID);
 
 # ----------------
 # set intersection
@@ -55,43 +36,50 @@ select sID, sName
 # names that are both a student name and a college name
 
 # project[sName](Student) intersect project[cName](College)
-select cName from College
+select cName as csName
+	from College
 	where exists
-	    (select sName from Student where (College.cName = Student.sName));
+	    (select *
+	    	from Student
+	    	where College.cName = Student.sName);
 
-# T3a := rename[A1](project[sName](Student))
-create temporary table T3a as
-	select sName as A1 from Student;
+# ----------
+# using join
+# ----------
 
-# T3b := rename[A1](project[cName](College))
-create temporary table T3b as
-	select cName as A1 from College;
+# R1 := rename[A1](project[sName](Student))
+create temporary table R1 as
+	select sName as csName from Student;
 
-# T3a join T3b
+# S1 := rename[A1](project[cName](College))
+create temporary table S1 as
+	select cName as csName from College;
+
+# R1 join S1
 select * from
-	T3a natural join T3b;
+	R1 natural join S1;
 
 # pairs of names of colleges in the same state
 
-# T5a := rename[cName1, state, enrollment1](College);
-create temporary table T5a as
+# R2 := rename[cName1, state, enrollment1](College);
+create temporary table R2 as
 	select cName as cName1, state, enrollment as enrollment1 from College;
 
-# T5b := rename[cName2, state, enrollment2](College);
-create temporary table T5b as
+# S5 := rename[cName2, state, enrollment2](College);
+create temporary table S5 as
 	select cName as cName2, state, enrollment as enrollment2 from College;
 
-# project[cName1, cName2](select[cName1 != cName2](T5a join T5b))
+# project[cName1, cName2](select[cName1 != cName2](R2 join S5))
 select cName1, cName2 from
-	T5a natural join T5b
+	R2 natural join S5
 	where cName1 != cName2;
 
-# project[cName1, cName2](select[cName1 < cName2](T5a join T5b))
+# project[cName1, cName2](select[cName1 < cName2](R2 join S5))
 select cName1, cName2 from
-	T5a natural join T5b
+	R2 natural join S5
 	where cName1 < cName2;
 
-# gpas of students applying to cs in ca
+# GPAs of students applying to cs in ca
 
 # select[(major = 'CS') and (state = 'CA')](Apply join Student)
 select *
