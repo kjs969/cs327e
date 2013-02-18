@@ -18,9 +18,10 @@ select distinct sID, sName, GPA
 	from Student natural join Apply
 	where major = 'CS';
 
-# -----------------
+# ----------------------
+# using subquery instead
 # in for membership
-# -----------------
+# ----------------------
 
 select sID, sName, GPA
 	from Student
@@ -29,25 +30,31 @@ select sID, sName, GPA
 			from Apply
 			where major = 'CS');
 
+# --------
+# order by
+# --------
+
 # GPA of students who applied in CS
 
 # project[GPA]
 # 	select[major = 'CS']
 # 		Student join Apply
 
-# --------
-# order by
-# --------
+# this doesn't work
 
 select GPA
 	from Student natural join Apply
 	where major = 'CS'
 	order by GPA desc;
 
+# this doesn't work either
+
 select distinct GPA
 	from Student natural join Apply
 	where major = 'CS'
 	order by GPA desc;
+
+# this does work
 
 select GPA
 	from Student
@@ -57,14 +64,16 @@ select GPA
 			where major = 'CS')
 	order by GPA desc;
 
+# ----------------
+# temporary tables
+# ----------------
+
 # project[GPA]
 # 	project[sID, sName, GPA]
 # 		select[major = 'CS']
 # 			Student join Apply
 
-# ----------------
-# temporary tables
-# ----------------
+# fixed, but cumbersome without subquery
 
 create temporary table T1a as
 	select distinct sID, sName, GPA
