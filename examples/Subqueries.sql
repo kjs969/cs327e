@@ -25,8 +25,8 @@ select distinct sID, sName, GPA
 
 select sID, sName, GPA
 	from Student
-	where sID in
-		(select sID
+	where sID in (
+		select sID
 			from Apply
 			where major = 'CS');
 
