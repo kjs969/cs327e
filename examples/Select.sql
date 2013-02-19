@@ -7,25 +7,25 @@ use downing_test;
 # students with GPA > 3.7
 
 # select[GPA > 3.7]
-# 	Student
+#   Student
 select *
-	from Student where (GPA > 3.7);
+    from Student where (GPA > 3.7);
 
 # students with GPA > 3.7 with high school size < 1000
 
 # select[(GPA > 3.7) and (sizeHS < 1000)]
-# 	Student
+#   Student
 select *
-	from Student
-	where (GPA > 3.7) and (sizeHS < 1000);
+    from Student
+    where (GPA > 3.7) and (sizeHS < 1000);
 
 # applications to Stanford with major = CS
 
 # select[(cName = 'Stanford') and (major = 'CS']
-# 	Apply
+#   Apply
 select *
-	from Apply
-	where (cName = 'Stanford') and (major = 'CS');
+    from Apply
+    where (cName = 'Stanford') and (major = 'CS');
 
 # -------
 # project
@@ -34,9 +34,9 @@ select *
 # student ID and decision of applications
 
 # project[sID, decision]
-# 	Apply
+#   Apply
 select sID, decision
-	from Apply;
+    from Apply;
 
 # ------------------
 # select and project
@@ -45,11 +45,11 @@ select sID, decision
 # ID and name of students with GPA > 3.7
 
 # project[sID, sName]
-# 	select[GPA > 3.7]
-# 		Student
+#   select[GPA > 3.7]
+#       Student
 select sID, sName
-	from Student
-	where (GPA > 3.7);
+    from Student
+    where (GPA > 3.7);
 
 # ---------------
 # select distinct
@@ -58,12 +58,12 @@ select sID, sName
 # major and decision of applications
 
 # project[major, decision]
-# 	Apply
+#   Apply
 
 select major, decision
-	from Apply;
+    from Apply;
 
 select distinct major, decision
-	from Apply;
+    from Apply;
 
 exit

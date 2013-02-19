@@ -13,21 +13,21 @@ drop table if exists Apply;
 # ------
 
 create table Student (
-	sID    int,
-	sName  text,
-	GPA    float,
-	sizeHS int);
+    sID    int,
+    sName  text,
+    GPA    float,
+    sizeHS int);
 
 create table Apply (
-	sID      int,
-	cName    text,
-	major    text,
-	decision boolean);
+    sID      int,
+    cName    text,
+    major    text,
+    decision boolean);
 
 create table College (
-	cName      text,
-	state      char(2),
-	enrollment int);
+    cName      text,
+    state      char(2),
+    enrollment int);
 
 # ----
 # show
