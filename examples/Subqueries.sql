@@ -6,10 +6,6 @@ use downing_test;
 
 # ID, name, and GPA of students who applied in CS
 
-# project[sID, sName, GPA]
-#   select[major = 'CS']
-#       Student join Apply
-
 select sID, sName, GPA
     from Student natural join Apply
     where major = 'CS';
@@ -36,18 +32,16 @@ select sID, sName, GPA
 
 # GPA of students who applied in CS
 
-# project[GPA]
-#   select[major = 'CS']
-#       Student join Apply
-
 # this doesn't work
+# because it has duplicates
 
 select GPA
     from Student natural join Apply
     where major = 'CS'
     order by GPA desc;
 
-# this doesn't work either
+# this doesn't work
+# because it doesn't remove duplicates in the right way
 
 select distinct GPA
     from Student natural join Apply
@@ -58,8 +52,8 @@ select distinct GPA
 
 select GPA
     from Student
-    where sID in
-        (select sID
+    where sID in (
+        select sID
             from Apply
             where major = 'CS')
     order by GPA desc;
@@ -67,11 +61,6 @@ select GPA
 # ----------------
 # temporary tables
 # ----------------
-
-# project[GPA]
-#   project[sID, sName, GPA]
-#       select[major = 'CS']
-#           Student join Apply
 
 # fixed, but cumbersome without subquery
 
@@ -83,18 +72,29 @@ select GPA
     from T1a
     order by GPA desc;
 
-# students who have applied to major in CS but not in EE
+# ID of students who have applied to major in CS but not in EE
 
-select sID, sName
+# this doesn't work
+# because students may be majoring CS in more than one place
+
+select distinct R.sID
+    from Apply as R, Apply as S
+    where R.sID    = S.sID and
+          R.major  = 'CS'  and
+          S.major != 'EE';
+
+# this works
+
+select sID
     from Student
     where
-        sID in
-            (select sID
+        sID in (
+            select sID
                 from Apply
                 where major = 'CS')
     and
-        sID not in
-            (select sID
+        sID not in (
+            select sID
                 from Apply
                 where major = 'EE');
 
@@ -105,26 +105,35 @@ select sID, sName
 # exists for existence
 # --------------------
 
-select cName, state
-    from College as R
-    where exists
-        (select *
-            from College as S
-            where R.state = S.state);
+# this doesn't work
+# because a college is in the same state as itself
 
 select cName, state
     from College as R
-    where exists
-        (select *
+    where exists (
+        select *
+            from College as S
+            where R.state = S.state);
+
+# this works
+
+select cName, state
+    from College as R
+    where exists (
+        select *
             from College as S
             where (R.state = S.state) and (R.cName != S.cName));
 
 # college with highest enrollment
 
+# ---------------------------
+# not exists for nonexistence
+# ---------------------------
+
 select cName
     from College as R
-    where not exists
-        (select *
+    where not exists (
+        select *
             from College as S
             where R.enrollment < S.enrollment);
 
@@ -132,8 +141,8 @@ select cName
 
 select sID, sName, GPA
     from Student as R
-    where not exists
-        (select *
+    where not exists (
+        select *
             from Student as S
             where R.GPA < S.GPA);
 
@@ -143,8 +152,8 @@ select sID, sName, GPA
 
 select sID, sName, GPA
     from Student
-    where GPA >= all
-        (select GPA
+    where GPA >= all (
+        select GPA
             from Student);
 
 exit
