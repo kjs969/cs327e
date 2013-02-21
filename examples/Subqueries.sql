@@ -32,8 +32,8 @@ select sID, sName, GPA
 
 # using order by
 
-# this doesn't work
-# because it has duplicates
+# this isn't right
+# because of duplicates
 
 # project[GPA] (
 #     select[major = 'CS']
@@ -44,7 +44,7 @@ select GPA
     where major = 'CS'
     order by GPA desc;
 
-# this doesn't work either
+# this isn't either
 # because it doesn't remove duplicates in the right way
 
 select distinct GPA
@@ -52,7 +52,7 @@ select distinct GPA
     where major = 'CS'
     order by GPA desc;
 
-# this does work
+# this is right
 
 # project[GPA] (
 #     Student
@@ -86,7 +86,7 @@ select GPA
 
 # ID of students who have applied to major in CS but not in EE
 
-# this doesn't work
+# this isn't right
 # because students may be majoring CS in more than one place
 
 # project[sID] (
@@ -100,7 +100,7 @@ select distinct R.sID
           R.major  = 'CS'  and
           S.major != 'EE';
 
-# this works
+# this is right
 
 # project[sID] (
 #     select[major  = 'CS']
@@ -127,7 +127,7 @@ select sID
 # using as for renaming
 # using exists for existence
 
-# this doesn't work
+# this isn't right
 # because a college is in the same state as itself
 
 select cName, state
@@ -137,7 +137,7 @@ select cName, state
             from College as S
             where R.state = S.state);
 
-# this works
+# this is right
 
 select cName, state
     from College as R

@@ -91,8 +91,8 @@ create temporary table S2 as
     select cName as cName2, state, enrollment as enrollment2
     from College;
 
-# this doesn't work
-# because it has duplicates
+# this isn't right
+# because of duplicates
 
 # project[cName1, cName2] (
 #     select[cName1 != cName2]
@@ -101,7 +101,7 @@ select cName1, cName2 from
     R2 natural join S2
     where cName1 != cName2;
 
-# this does work
+# this is right
 
 # project[cName1, cName2](select[cName1 < cName2](R2 join S2))
 select cName1, cName2 from
