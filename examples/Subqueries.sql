@@ -6,8 +6,9 @@ use downing_test;
 
 # ID, name, and GPA of students who applied in CS
 
-# project[sID, sName, GPA]
-#     select[major = 'CS'](Student join Apply)
+# project[sID, sName, GPA] (
+#     select[major = 'CS']
+#         (Student join Apply))
 
 select sID, sName, GPA
     from Student natural join Apply
@@ -34,9 +35,9 @@ select sID, sName, GPA
 # this doesn't work
 # because it has duplicates
 
-# project GPA
+# project[GPA] (
 #     select[major = 'CS']
-#         Student join Apply
+#         (Student join Apply))
 
 select GPA
     from Student natural join Apply
@@ -53,8 +54,11 @@ select distinct GPA
 
 # this does work
 
-# project[GPA]
-#     Student diff select[major = 'CS']Student
+# project[GPA] (
+#     Student
+#     diff
+#     select[major = 'CS']
+#         (Student))
 select GPA
     from Student
     where sID in (
@@ -66,16 +70,18 @@ select GPA
 # using temporary tables
 # fixed, but cumbersome without subquery
 
-# project[GPA]
-#     project[sID, GPA]
+# T :=
+#     project[sID, GPA] (
 #         select[major = 'CS]
-#             Student join Apply
-create temporary table T1a as
+#             (Student join Apply)))
+# project[GPA]
+#     (T)
+create temporary table T as
     select distinct sID, GPA
         from Student natural join Apply
         where major = 'CS';
 select GPA
-    from T1a
+    from T
     order by GPA desc;
 
 # ID of students who have applied to major in CS but not in EE
@@ -83,11 +89,11 @@ select GPA
 # this doesn't work
 # because students may be majoring CS in more than one place
 
-# project[sID]
-#     select[(major1 = 'CS') and (major2 != 'EE')]
+# project[sID] (
+#     select[(major1 = 'CS') and (major2 != 'EE')] (
 #          rename[sID, cName1, major1, decision1] Apply
 #          join
-#          rename[sID, cName2, major2, decision2] Apply
+#          rename[sID, cName2, major2, decision2] Apply))
 select distinct R.sID
     from Apply as R inner join Apply as S
     where R.sID    = S.sID and
@@ -96,11 +102,13 @@ select distinct R.sID
 
 # this works
 
-# project sID
-#     select[major  = 'CS'] Student
+# project[sID] (
+#     select[major  = 'CS']
+#         (Student))
 # diff
-# project sID
-#     select[major != 'EE'] Student
+# project[sID] (
+#     select[major != 'EE']
+#         (Student))
 select sID
     from Student
     where

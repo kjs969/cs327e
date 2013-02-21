@@ -7,14 +7,14 @@ use downing_test;
 # students with GPA > 3.7
 
 # select[GPA > 3.7]
-#    Student
+#    (Student)
 select *
     from Student where (GPA > 3.7);
 
 # students with GPA > 3.7 with high school size < 1000
 
 # select[(GPA > 3.7) and (sizeHS < 1000)]
-#    Student
+#    (Student)
 select *
     from Student
     where (GPA > 3.7) and (sizeHS < 1000);
@@ -34,7 +34,7 @@ select *
 # student ID and decision of applications
 
 # project[sID, decision]
-#    Apply
+#    (Apply)
 select sID, decision
     from Apply;
 
@@ -44,9 +44,9 @@ select sID, decision
 
 # ID and name of students with GPA > 3.7
 
-# project[sID, sName]
+# project[sID, sName] (
 #    select[GPA > 3.7]
-#        Student
+#        (Student))
 select sID, sName
     from Student
     where (GPA > 3.7);
@@ -58,7 +58,7 @@ select sID, sName
 # major and decision of applications
 
 # project[major, decision]
-#    Apply
+#    (Apply)
 
 select major, decision
     from Apply;
