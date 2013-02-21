@@ -6,6 +6,9 @@ use downing_test;
 
 # ID, name, and GPA of students who applied in CS
 
+project[sID, sName, GPA]
+    select[major = 'CS'](Student join Apply)
+
 select sID, sName, GPA
     from Student natural join Apply
     where major = 'CS';
@@ -14,10 +17,8 @@ select distinct sID, sName, GPA
     from Student natural join Apply
     where major = 'CS';
 
-# ----------------------
 # using subquery instead
 # in for membership
-# ----------------------
 
 select sID, sName, GPA
     from Student
@@ -26,11 +27,9 @@ select sID, sName, GPA
             from Apply
             where major = 'CS');
 
-# --------
-# order by
-# --------
-
 # GPA of students who applied in CS
+
+# using order by
 
 # this doesn't work
 # because it has duplicates
@@ -40,7 +39,7 @@ select GPA
     where major = 'CS'
     order by GPA desc;
 
-# this doesn't work
+# this doesn't work either
 # because it doesn't remove duplicates in the right way
 
 select distinct GPA
