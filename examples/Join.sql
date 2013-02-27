@@ -42,11 +42,11 @@ select *
     from Student natural join Apply
     where (sizeHS > 1000) and (major = 'CS') and (decision = false);
 
-# project[sName, GPA] (
-#    select[(sizeHS > 1000)     and
-#           (major = 'CS')      and
-#           (decision = false)]
-#       (Student join Apply))
+# project[sName, GPA]
+#     (select[(sizeHS > 1000)     and
+#             (major = 'CS')      and
+#             (decision = false)]
+#         (Student join Apply))
 select sName, GPA
     from Student natural join Apply
     where (sizeHS > 1000) and (major = 'CS') and (decision = false);
@@ -69,11 +69,11 @@ select *
           (decision   = true)  and
           (enrollment > 20000);
 
-# project[sName, GPA] (
-#     select[(sizeHS > 500)       and
-#           (major = 'CS')        and
-#           (decision = false)    and
-#           (enrollment > 20000)]
+# project[sName, GPA]
+#     (select[(sizeHS > 500)       and
+#            (major = 'CS')        and
+#            (decision = false)    and
+#            (enrollment > 20000)]
 #         (Student join Apply join College))
 select sName, GPA
     from Student natural join Apply natural join College

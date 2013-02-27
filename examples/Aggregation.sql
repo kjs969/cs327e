@@ -120,4 +120,84 @@ select *
             where (R.sID != S.sID) and (R.sizeHS = S.sizeHS))
     order by sID;
 
+# amount by which the average GPA of students applying to CS
+# exceeds the average GPA of students not applying to CS
+
+select *
+    from
+        (select avg(GPA) as x
+            from Student
+            where sID in
+                (select sID
+                    from Apply
+                        where major = 'CS')) as R,
+        (select avg(GPA) as y
+            from Student
+            where sID not in
+                (select sID
+                    from Apply
+                        where major = 'CS')) as S;
+
+select R.x - S.y
+    from
+        (select avg(GPA) as x
+            from Student
+            where sID in
+                (select sID
+                    from Apply
+                        where major = 'CS')) as R,
+        (select avg(GPA) as y
+            from Student
+            where sID not in
+                (select sID
+                    from Apply
+                        where major = 'CS')) as S;
+
+# using subquery in select
+
+select
+    (select avg(GPA) as x
+        from Student
+        where sID in
+            (select sID
+                from Apply
+                    where major = 'CS'))
+    -
+    (select avg(GPA) as y
+        from Student
+        where sID not in
+            (select sID
+                from Apply
+                    where major = 'CS')) as S
+    from Student;
+
+select distinct
+    (select avg(GPA) as x
+        from Student
+        where sID in
+            (select sID
+                from Apply
+                    where major = 'CS'))
+    -
+    (select avg(GPA) as y
+        from Student
+        where sID not in
+            (select sID
+                from Apply
+                    where major = 'CS')) as S
+    from Student;
+
+# number of applicants to each college
+
+select cName
+    from Apply
+    order by cName;
+
+select count(*)
+    from Apply;
+
+select cName, count(*)
+    from Apply
+    group by cName;
+
 exit

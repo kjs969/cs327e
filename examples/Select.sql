@@ -8,6 +8,7 @@ use downing_test;
 
 # select[GPA > 3.7]
 #    (Student)
+
 select *
     from Student where (GPA > 3.7);
 
@@ -15,6 +16,7 @@ select *
 
 # select[(GPA > 3.7) and (sizeHS < 1000)]
 #    (Student)
+
 select *
     from Student
     where (GPA > 3.7) and (sizeHS < 1000);
@@ -23,6 +25,7 @@ select *
 
 # select[(cName = 'Stanford') and (major = 'CS']
 #    Apply
+
 select *
     from Apply
     where (cName = 'Stanford') and (major = 'CS');
@@ -35,6 +38,7 @@ select *
 
 # project[sID, decision]
 #    (Apply)
+
 select sID, decision
     from Apply;
 
@@ -47,6 +51,7 @@ select sID, decision
 # project[sID, sName] (
 #    select[GPA > 3.7]
 #        (Student))
+
 select sID, sName
     from Student
     where (GPA > 3.7);
