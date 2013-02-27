@@ -34,7 +34,7 @@ select min(GPA)
 
 # average GPA of students applying to CS
 
-# this isn't right
+# this is not right
 # because of duplicates
 
 select *
@@ -80,7 +80,7 @@ select count(*)
 
 # number of students who applied to Cornell
 
-# this isn't right
+# this is not right
 # because of duplicates
 
 select *
