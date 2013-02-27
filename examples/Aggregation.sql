@@ -189,7 +189,7 @@ select distinct
 
 # number of applicants to each college
 
-select cName
+select *
     from Apply
     order by cName;
 
@@ -199,5 +199,28 @@ select count(*)
 select cName, count(*)
     from Apply
     group by cName;
+
+# college enrollment by state
+
+select *
+    from College
+    order by state;
+
+select sum(enrollment)
+    from College;
+
+select state, sum(enrollment)
+    from College
+    group by state;
+
+# min and max GPA of applicants to each college and major
+
+select *
+    from Student natural join Apply
+    order by cName, major;
+
+select cName, major, min(GPA), max(GPA)
+    from Student natural join Apply
+    group by cName, major;
 
 exit
