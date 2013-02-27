@@ -215,12 +215,38 @@ select state, sum(enrollment)
 
 # min and max GPA of applicants to each college and major
 
-select *
+select cName, major, GPA
     from Student natural join Apply
     order by cName, major;
 
 select cName, major, min(GPA), max(GPA)
     from Student natural join Apply
     group by cName, major;
+
+# spread between min and max GPA of applicants to each college and major
+
+select y - x
+    from
+        (select cName, major, min(GPA) as x, max(GPA) as y
+            from Student natural join Apply
+            group by cName, major) as T;
+
+# max spread between min and max GPA of applicants to each college and major
+
+select max(y - x)
+    from
+        (select cName, major, min(GPA) as x, max(GPA) as y
+            from Student natural join Apply
+            group by cName, major) as T;
+
+# number of colleges applied to by each student
+
+select *
+    from Student natural join Apply
+    order by Student.sID, cName;
+
+select Student.sID, count(distinct cName)
+    from Student natural join Apply
+    group by Student.sID;
 
 exit
