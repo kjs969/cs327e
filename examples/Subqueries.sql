@@ -72,7 +72,7 @@ select GPA
 
 # T :=
 #     project[sID, GPA]
-#         (select[major = 'CS]
+#         (select[major = 'CS']
 #             (Student join Apply)))
 # project[GPA]
 #     (T)
