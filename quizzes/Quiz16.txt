@@ -1,0 +1,34 @@
+CS327e: Quiz #16 (5 pts)
+
+--------------------------------------------------------------------------
+1. Consider a relation R(A) with r tuples, all unique within R, and a
+   relation S(B) with s tuples, all unique within S.
+   How many tuples are in R cross   join S?
+   How many tuples are in R natural join S?
+   (1 pt)
+
+r * s
+r * s
+--
+
+--------------------------------------------------------------------------
+2. Consider a relation R(A) with r tuples, all unique within R, and a
+   relation S(A) with s tuples, all unique within S.
+   Furthermore, all the tuples in R are distinct from all the tuples in S.
+   How many tuples are in R cross   join S?
+   How many tuples are in R natural join S?
+   (1 pt)
+
+r * s
+0
+--
+
+--------------------------------------------------------------------------
+3. Consider a relation R(A) with r tuples, all unique within R.
+   How many tuples are in R cross   join R?
+   How many tuples are in R natural join R?
+   (2 pts)
+
+r * r
+r
+--
