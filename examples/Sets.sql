@@ -34,7 +34,7 @@ order by name;
 # project[cName]
 #     (College)
 
-# mysql doesn't support 'intersect'
+# mysql does not support 'intersect'
 
 # using a subquery, with exists
 
@@ -56,7 +56,7 @@ select * from
 # set difference
 # --------------
 
-# ID of students who didn't apply anywhere
+# ID of students who did not apply anywhere
 
 # project[sID]
 #     (Student)
@@ -64,7 +64,7 @@ select * from
 # project[sID]
 #     (Apply)
 
-# mysql doesn't support 'except'
+# mysql does not support 'except'
 
 # using a subquery, with not in
 
@@ -99,7 +99,7 @@ select sID
 #         rename[cName2, state, enrollment2]
 #             (College);
 
-# this isn't right
+# this is not right
 # because of duplicates
 
 select cName1, cName2

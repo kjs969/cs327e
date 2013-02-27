@@ -31,7 +31,7 @@ select sID, sName, GPA
 
 # using order by
 
-# this isn't right
+# this is not right
 # because of duplicates
 
 # project[GPA]
@@ -43,8 +43,8 @@ select GPA
     where major = 'CS'
     order by GPA desc;
 
-# this isn't right either
-# because it doesn't remove duplicates in the right way
+# this is not right either
+# because it does not remove duplicates in the right way
 
 select distinct GPA
     from Student natural join Apply
@@ -98,7 +98,7 @@ select GPA
 
 # ID of students who have applied to major in CS but not in EE
 
-# this isn't right
+# this is not right
 # because students may be majoring CS in more than one place
 
 # project[sID]
@@ -142,7 +142,7 @@ select sID
 # using as
 # using subquery, with exists
 
-# this isn't right
+# this is not right
 # because a college is in the same state as itself
 
 select cName, state
