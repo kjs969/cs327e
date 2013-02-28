@@ -1,22 +1,26 @@
 use downing_test;
 
-# ----------
-# subqueries
-# ----------
-
+# ------------------------------------------------------------------------
 # ID, name, and GPA of students who applied in CS
 
 # project[sID, sName, GPA]
 #     (select[major = 'CS']
 #         (Student join Apply))
 
+select *
+    from Student natural join Apply
+    where major = 'CS'
+    order by sID;
+
 select sID, sName, GPA
     from Student natural join Apply
-    where major = 'CS';
+    where major = 'CS'
+    order by sID;
 
 select distinct sID, sName, GPA
     from Student natural join Apply
-    where major = 'CS';
+    where major = 'CS'
+    order by sID;
 
 # using subquery, with in
 
@@ -25,18 +29,20 @@ select sID, sName, GPA
     where sID in (
         select sID
             from Apply
-            where major = 'CS');
+            where major = 'CS')
+    order by sID;
 
+# ------------------------------------------------------------------------
 # GPA of students who applied in CS
 
-# using order by
+# project[GPA]
+#     (Student
+#      diff
+#      select[major = 'CS']
+#          (Student))
 
 # this is not right
 # because of duplicates
-
-# project[GPA]
-#     (select[major = 'CS']
-#         (Student join Apply))
 
 select GPA
     from Student natural join Apply
@@ -52,13 +58,7 @@ select distinct GPA
     order by GPA desc;
 
 # this is right
-# using subquery with in
-
-# project[GPA]
-#     (Student
-#      diff
-#      select[major = 'CS']
-#          (Student))
+# using subquery, with in
 
 select GPA
     from Student
@@ -68,7 +68,7 @@ select GPA
             where major = 'CS')
     order by GPA desc;
 
-# fixed, but cumbersome
+# this is also right, but cumbersome
 
 # T :=
 #     project[sID, GPA]
@@ -96,16 +96,19 @@ select GPA
     from T
     order by GPA desc;
 
+# ------------------------------------------------------------------------
 # ID of students who have applied to major in CS but not in EE
+
+# project[sID]
+#     (select[major  = 'CS']
+#         (Student))
+# diff
+# project[sID]
+#     (select[major != 'EE']
+#         (Student))
 
 # this is not right
 # because students may be majoring CS in more than one place
-
-# project[sID]
-#     (select[(major1 = 'CS') and (major2 != 'EE')]
-#          (rename[sID, cName1, major1, decision1] Apply
-#           join
-#           rename[sID, cName2, major2, decision2] Apply))
 
 select distinct R.sID
     from Apply as R inner join Apply as S
@@ -115,14 +118,6 @@ select distinct R.sID
 
 # this is right
 # using subquery, with in and not in
-
-# project[sID]
-#     (select[major  = 'CS']
-#         (Student))
-# diff
-# project[sID]
-#     (select[major != 'EE']
-#         (Student))
 
 select sID
     from Student
@@ -137,6 +132,7 @@ select sID
                 from Apply
                 where major = 'EE');
 
+# ------------------------------------------------------------------------
 # colleges, such that there's another college in the same state
 
 # using as
@@ -161,6 +157,7 @@ select cName, state
             from College as S
             where (R.state = S.state) and (R.cName != S.cName));
 
+# ------------------------------------------------------------------------
 # college with highest enrollment
 
 # using subquery, with not exists
@@ -172,6 +169,7 @@ select cName
             from College as S
             where R.enrollment < S.enrollment);
 
+# ------------------------------------------------------------------------
 # student with highest GPA
 
 select sID, sName, GPA
