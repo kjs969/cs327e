@@ -1,16 +1,14 @@
 use downing_test;
 
-# ---------
-# set union
-# ---------
+/* -----------------------------------------------------------------------
+names of students OR colleges
 
-# names of students OR colleges
-
-# project[cName]
-#     (Student)
-# union
-# project[sName]
-#     (College)
+project[cName]
+    (Student)
+union
+project[sName]
+    (College)
+*/
 
 (select cName from College)
 union
@@ -22,19 +20,17 @@ union
 (select sName as name from Student)
 order by name;
 
-# ----------------
-# set intersection
-# ----------------
+/* -----------------------------------------------------------------------
+names of students AND colleges
 
-# names of students AND colleges
+project[sName]
+    (Student)
+intersect
+project[cName]
+    (College)
+*/
 
-# project[sName]
-#     (Student)
-# intersect
-# project[cName]
-#     (College)
-
-# mysql does not support 'intersect'
+# mysql does not support "intersect"
 
 # using a subquery, with exists
 

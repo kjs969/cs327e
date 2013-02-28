@@ -1,6 +1,9 @@
 use downing_test;
 
-# ------------------------------------------------------------------------
+/* -----------------------------------------------------------------------
+Insert
+*/
+
 insert into Student values (123, 'Amy',    3.9, 1000);
 insert into Student values (234, 'Bob',    3.6, 1500);
 insert into Student values (345, 'Craig',  3.5,  500);
@@ -14,7 +17,6 @@ insert into Student values (765, 'Jay',    2.9, 1500);
 insert into Student values (654, 'Amy',    3.9, 1000);
 insert into Student values (543, 'Craig',  3.4, 2000);
 
-# ------------------------------------------------------------------------
 insert into Apply values (123, 'Stanford', 'CS',             true);
 insert into Apply values (123, 'Stanford', 'EE',             false);
 insert into Apply values (123, 'Berkeley', 'CS',             true);
@@ -35,14 +37,16 @@ insert into Apply values (765, 'Cornell',  'history',        false);
 insert into Apply values (765, 'Cornell',  'psychology',     true);
 insert into Apply values (543, 'MIT',       'CS',            false);
 
-# ------------------------------------------------------------------------
 insert into College values ('Stanford', 'CA', 15000);
 insert into College values ('Berkeley', 'CA', 36000);
 insert into College values ('MIT',      'MA', 10000);
 insert into College values ('Cornell',  'NY', 21000);
 insert into College values ('Irene',    'TX', 25000);
 
-# ------------------------------------------------------------------------
+/* -----------------------------------------------------------------------
+Select
+*/
+
 select * from Student;
 select * from Apply;
 select * from College;
