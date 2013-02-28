@@ -177,7 +177,8 @@ select sID, sName, GPA
     where not exists
         (select *
             from Student as S
-            where R.GPA < S.GPA);
+            where R.GPA < S.GPA)
+    order by sID;
 
 # using subquery, with all
 
@@ -185,6 +186,7 @@ select sID, sName, GPA
     from Student
     where GPA >= all
         (select GPA
-            from Student);
+            from Student)
+    order by sID;
 
 exit
