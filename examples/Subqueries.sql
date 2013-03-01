@@ -167,11 +167,22 @@ select cName
             from College as S
             where R.enrollment < S.enrollment);
 
+# using subquery, with all
+
+select cName
+    from College
+    where enrollment >= all
+        (select enrollment
+            from College);
+
 /* -----------------------------------------------------------------------
 student with highest GPA
 */
 
 # using subquery, with not exists
+
+# this is not right
+# because of nulls
 
 select sID, sName, GPA
     from Student as R
@@ -179,6 +190,19 @@ select sID, sName, GPA
         (select *
             from Student as S
             where R.GPA < S.GPA)
+    order by sID;
+
+# this is right
+
+select sID, sName, GPA
+    from Student as R
+    where
+        not exists
+            (select *
+                from Student as S
+                where R.GPA < S.GPA)
+        and
+        (GPA is not null)
     order by sID;
 
 # using subquery, with all

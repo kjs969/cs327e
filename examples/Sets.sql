@@ -4,21 +4,26 @@ use downing_test;
 set union
 names of students OR colleges
 
-project[cName]
+project[sName]
     (Student)
 union
-project[sName]
+project[cName]
     (College)
 */
 
-select cName from College
-union
-select sName from Student
-order by cName;
+# this is not right
+# because the attribute name is misleading
 
-select cName as name from College
+select sName from Student
 union
+select cName from College
+order by sName;
+
+# this is right
+
 select sName as name from Student
+union
+select cName as name from College
 order by name;
 
 /* -----------------------------------------------------------------------
@@ -34,15 +39,6 @@ project[cName]
 
 # mysql does not support intersect
 
-# using a subquery, with exists
-
-select cName as name
-    from College
-    where exists
-        (select *
-            from Student
-            where cName = sName);
-
 # using join
 
 select *
@@ -50,6 +46,23 @@ select *
         (select sName as name from Student) as R
         natural join
         (select cName as name from College) as S;
+
+# using a subquery, with in
+
+select sName as name
+    from Student
+    where sName in
+        (select cName
+            from College);
+
+# using a subquery, with exists
+
+select sName as name
+    from Student
+    where exists
+        (select *
+            from College
+            where sName = cName);
 
 /* -----------------------------------------------------------------------
 set difference
