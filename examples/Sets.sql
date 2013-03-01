@@ -11,14 +11,14 @@ project[sName]
     (College)
 */
 
-(select cName from College)
+select cName from College
 union
-(select sName from Student)
+select sName from Student
 order by cName;
 
-(select cName as name from College)
+select cName as name from College
 union
-(select sName as name from Student)
+select sName as name from Student
 order by name;
 
 /* -----------------------------------------------------------------------
@@ -130,22 +130,22 @@ project[cName](
         (Student join Apply join College))
 */
 
-(select *
+select *
     from Student natural join Apply natural join College
-    where (sName = 'Amy') and (enrollment < 20000))
+    where (sName = 'Amy') and (enrollment < 20000)
 union
-(select *
+select *
     from Student natural join Apply natural join College
-    where (sName = 'Irene') and (enrollment < 20000))
+    where (sName = 'Irene') and (enrollment < 20000)
 order by cName;
 
-(select cName
+select cName
     from Student natural join Apply natural join College
-    where (sName = 'Amy') and (enrollment < 20000))
+    where (sName = 'Amy') and (enrollment < 20000)
 union
-(select cName
+select cName
     from Student natural join Apply natural join College
-    where (sName = 'Irene') and (enrollment < 20000))
+    where (sName = 'Irene') and (enrollment < 20000)
 order by cName;
 
 select *
