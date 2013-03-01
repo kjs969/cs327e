@@ -13,10 +13,15 @@ select *
     where major = 'CS'
     order by sID;
 
+# this is not right
+# because of duplicates
+
 select sID, sName, GPA
     from Student natural join Apply
     where major = 'CS'
     order by sID;
+
+# this is right
 
 select distinct sID, sName, GPA
     from Student natural join Apply

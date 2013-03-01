@@ -132,7 +132,8 @@ select cName1, cName2
     where cName1 < cName2;
 
 /* -----------------------------------------------------------------------
-colleges with enrollments < 20000 that Amy OR Irene applied to
+set union
+colleges with (enrollments < 20000) AND (Amy OR Irene) applied to
 
 project[cName](
     select[(sName = 'Amy') and (enrollment < 20000)]
@@ -161,6 +162,8 @@ select cName
     where (sName = 'Irene') and (enrollment < 20000)
 order by cName;
 
+# just using join
+
 select *
     from Student natural join Apply natural join College
     where ((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000)
@@ -172,7 +175,8 @@ select distinct cName
     order by cName;
 
 /* -----------------------------------------------------------------------
-colleges with enrollments < 20000 that Amy AND Irene applied to
+set intersection
+colleges with (enrollments < 20000) AND (Amy AND Irene) applied to
 
 project[cName](
     select[(sName = 'Amy') and (enrollment < 20000)]
