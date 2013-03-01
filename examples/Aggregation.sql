@@ -1,38 +1,32 @@
 use downing_test;
 
-# ---
-# avg
-# ---
-
-# average GPA of students
+/* -----------------------------------------------------------------------
+average GPA of students
+*/
 
 select *
     from Student
-    order by GPA desc;
+    order by GPA;
 
 select avg(GPA)
     from Student;
 
-# ---
-# min
-# ---
-
-# lowest GPA of students applying to CS
+/* -----------------------------------------------------------------------
+lowest GPA of students applying to CS
+*/
 
 select *
     from Student natural join Apply
     where major = 'CS'
-    order by GPA desc;
+    order by GPA;
 
 select min(GPA)
     from Student natural join Apply
     where major = 'CS';
 
-# ---
-# avg
-# ---
-
-# average GPA of students applying to CS
+/* -----------------------------------------------------------------------
+average GPA of students applying to CS
+*/
 
 # this is not right
 # because of duplicates
@@ -40,7 +34,7 @@ select min(GPA)
 select *
     from Student natural join Apply
     where major = 'CS'
-    order by GPA desc;
+    order by GPA;
 
 select avg(GPA)
     from Student natural join Apply
@@ -50,11 +44,11 @@ select avg(GPA)
 
 select *
     from Student
-    where sID in (
-        select sID
+    where sID in
+        (select sID
             from Apply
             where major = 'CS')
-    order by GPA desc;
+    order by GPA;
 
 select avg(GPA)
     from Student
@@ -63,22 +57,22 @@ select avg(GPA)
             from Apply
             where major = 'CS');
 
-# -----
-# count
-# -----
-
-# number of colleges with enrollment > 15000
+/* -----------------------------------------------------------------------
+number of colleges with enrollment > 15000
+*/
 
 select *
     from College
     where enrollment > 15000
-    order by enrollment desc;
+    order by enrollment;
 
 select count(*)
     from College
     where enrollment > 15000;
 
-# number of students who applied to Cornell
+/* -----------------------------------------------------------------------
+number of students who applied to Cornell
+*/
 
 # this is not right
 # because of duplicates
@@ -105,8 +99,10 @@ select count(distinct sID)
     where cName = "Cornell"
     order by sID;
 
-# students, such that the number of other students with the same GPA
-# equals the number of other students with the same high school size
+/* -----------------------------------------------------------------------
+students, such that the number of other students with the same GPA
+equals the number of other students with the same high school size
+*/
 
 select *
     from Student as R
@@ -120,8 +116,10 @@ select *
             where (R.sID != S.sID) and (R.sizeHS = S.sizeHS))
     order by sID;
 
-# amount by which the average GPA of students applying to CS
-# exceeds the average GPA of students not applying to CS
+/* -----------------------------------------------------------------------
+amount by which the average GPA of students applying to CS
+exceeds the average GPA of students not applying to CS
+*/
 
 select *
     from
@@ -187,7 +185,9 @@ select distinct
                     where major = 'CS')) as S
     from Student;
 
-# number of applicants to each college
+/* -----------------------------------------------------------------------
+number of applicants to each college
+*/
 
 select *
     from Apply
@@ -200,7 +200,9 @@ select cName, count(*)
     from Apply
     group by cName;
 
-# college enrollment by state
+/* -----------------------------------------------------------------------
+college enrollment by state
+*/
 
 select *
     from College
@@ -213,7 +215,9 @@ select state, sum(enrollment)
     from College
     group by state;
 
-# min and max GPA of applicants to each college and major
+/* -----------------------------------------------------------------------
+min and max GPA of applicants to each college and major
+*/
 
 select cName, major, GPA
     from Student natural join Apply
@@ -223,7 +227,9 @@ select cName, major, min(GPA), max(GPA)
     from Student natural join Apply
     group by cName, major;
 
-# spread between min and max GPA of applicants to each college and major
+/* -----------------------------------------------------------------------
+spread between min and max GPA of applicants to each college and major
+*/
 
 select y - x
     from
@@ -231,7 +237,9 @@ select y - x
             from Student natural join Apply
             group by cName, major) as T;
 
-# max spread between min and max GPA of applicants to each college and major
+/* -----------------------------------------------------------------------
+max spread between min and max GPA of applicants to each college and major
+*/
 
 select max(y - x)
     from
@@ -239,7 +247,9 @@ select max(y - x)
             from Student natural join Apply
             group by cName, major) as T;
 
-# number of colleges applied to by each student
+/* -----------------------------------------------------------------------
+number of colleges applied to by each student
+*/
 
 select *
     from Student natural join Apply

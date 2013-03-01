@@ -1,6 +1,7 @@
 use downing_test;
 
 /* -----------------------------------------------------------------------
+set union
 names of students OR colleges
 
 project[cName]
@@ -21,6 +22,7 @@ union
 order by name;
 
 /* -----------------------------------------------------------------------
+set intersection
 names of students AND colleges
 
 project[sName]
@@ -30,7 +32,7 @@ project[cName]
     (College)
 */
 
-# mysql does not support "intersect"
+# mysql does not support intersect
 
 # using a subquery, with exists
 
@@ -43,24 +45,24 @@ select cName as name
 
 # using join
 
-select * from
-    (select sName as name from Student) as R
-    natural join
-    (select cName as name from College) as S;
+select *
+    from
+        (select sName as name from Student) as R
+        natural join
+        (select cName as name from College) as S;
 
-# --------------
-# set difference
-# --------------
+/* -----------------------------------------------------------------------
+set difference
+ID of students who did not apply anywhere
 
-# ID of students who did not apply anywhere
+project[sID]
+    (Student)
+diff
+project[sID]
+    (Apply)
+*/
 
-# project[sID]
-#     (Student)
-# diff
-# project[sID]
-#     (Apply)
-
-# mysql does not support 'except'
+# mysql does not support except
 
 # using a subquery, with not in
 
@@ -81,19 +83,17 @@ select sID
             where Student.sID = Apply.sID)
     order by sID;
 
-# ------
-# rename
-# ------
+/* -----------------------------------------------------------------------
+pairs of names of colleges in the same state
 
-# pairs of names of colleges in the same state
-
-# project[cName1, cName2] (
-#     select[cName1 != cName2]
-#         rename[cName1, state, enrollment1]
-#             (College);
-#         join
-#         rename[cName2, state, enrollment2]
-#             (College);
+project[cName1, cName2]
+    (select[cName1 != cName2]
+        rename[cName1, state, enrollment1]
+            (College);
+        join
+        rename[cName2, state, enrollment2]
+            (College);
+*/
 
 # this is not right
 # because of duplicates
@@ -118,42 +118,67 @@ select cName1, cName2
             from College) as S
     where cName1 < cName2;
 
-# colleges with enrollments < 20000 that Amy OR Irene applied to
+/* -----------------------------------------------------------------------
+colleges with enrollments < 20000 that Amy OR Irene applied to
 
-# project[cName](
-#   select[(sName = 'Amy') and (enrollment < 20000)]
-#   (Student join Apply join College))
-# union
-# project[cName](
-#   select[(sName = 'Irene') and (enrollment < 20000)]
-#   (Student join Apply join College))
+project[cName](
+    select[(sName = 'Amy') and (enrollment < 20000)]
+        (Student join Apply join College))
+union
+project[cName](
+    select[(sName = 'Irene') and (enrollment < 20000)]
+        (Student join Apply join College))
+*/
 
-# select[((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000)]
-#     (Student join Apply join College)
+(select *
+    from Student natural join Apply natural join College
+    where (sName = 'Amy') and (enrollment < 20000))
+union
+(select *
+    from Student natural join Apply natural join College
+    where (sName = 'Irene') and (enrollment < 20000))
+order by cName;
+
+(select cName
+    from Student natural join Apply natural join College
+    where (sName = 'Amy') and (enrollment < 20000))
+union
+(select cName
+    from Student natural join Apply natural join College
+    where (sName = 'Irene') and (enrollment < 20000))
+order by cName;
 
 select *
     from Student natural join Apply natural join College
     where ((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000)
     order by cName;
 
-# project[cName](
-#     select[((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000)]
-#         (Student join Apply join College))
-
 select distinct cName
     from Student natural join Apply natural join College
     where (((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000))
     order by cName;
 
-# colleges with enrollments < 20000 that Amy AND Irene applied to
+/* -----------------------------------------------------------------------
+colleges with enrollments < 20000 that Amy AND Irene applied to
 
-# project[cName](
-#   select[(sName = 'Amy') and (enrollment < 20000)]
-#   (Student join Apply join College))
-# intersect
-# project[cName](
-#   select[(sName = 'Irene') and (enrollment < 20000)]
-#   (Student join Apply join College))
+project[cName](
+    select[(sName = 'Amy') and (enrollment < 20000)]
+        (Student join Apply join College))
+intersect
+project[cName](
+    select[(sName = 'Irene') and (enrollment < 20000)]
+        (Student join Apply join College))
+*/
+
+select *
+    from
+        (select distinct cName from
+            Student natural join Apply natural join College
+            where ((sName = 'Amy') and (enrollment < 20000))) as R
+    where exists
+        (select *
+            from Student natural join Apply natural join College
+            where ((sName = 'Irene') and (enrollment < 20000)));
 
 select *
     from
