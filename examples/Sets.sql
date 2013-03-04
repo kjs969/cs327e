@@ -192,6 +192,16 @@ select *
         (select distinct cName from
             Student natural join Apply natural join College
             where ((sName = 'Amy') and (enrollment < 20000))) as R
+    where cName in
+        (select cName
+            from Student natural join Apply natural join College
+            where ((sName = 'Irene') and (enrollment < 20000)));
+
+select *
+    from
+        (select distinct cName from
+            Student natural join Apply natural join College
+            where ((sName = 'Amy') and (enrollment < 20000))) as R
     where exists
         (select *
             from Student natural join Apply natural join College
