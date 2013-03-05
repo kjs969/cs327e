@@ -171,7 +171,7 @@ select *
 
 select distinct cName
     from Student natural join Apply natural join College
-    where (((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000))
+    where ((sName = 'Amy') or (sName = 'Irene')) and (enrollment < 20000)
     order by cName;
 
 /* -----------------------------------------------------------------------
@@ -187,34 +187,40 @@ project[cName](
         (Student join Apply join College))
 */
 
-select *
-    from
-        (select distinct cName from
-            Student natural join Apply natural join College
-            where ((sName = 'Amy') and (enrollment < 20000))) as R
-    where cName in
-        (select cName
-            from Student natural join Apply natural join College
-            where ((sName = 'Irene') and (enrollment < 20000)));
+# using join
 
 select *
     from
         (select distinct cName from
             Student natural join Apply natural join College
-            where ((sName = 'Amy') and (enrollment < 20000))) as R
-    where exists
-        (select *
-            from Student natural join Apply natural join College
-            where ((sName = 'Irene') and (enrollment < 20000)));
-
-select *
-    from
-        (select distinct cName from
-            Student natural join Apply natural join College
-            where ((sName = 'Amy') and (enrollment < 20000))) as R
+            where (sName = 'Amy') and (enrollment < 20000)) as R
         natural join
         (select distinct cName from
             Student natural join Apply natural join College
-            where ((sName = 'Irene') and (enrollment < 20000))) as S;
+            where (sName = 'Irene') and (enrollment < 20000)) as S;
+
+# using a subquery, with in
+
+select *
+    from
+        (select distinct cName from
+            Student natural join Apply natural join College
+            where (sName = 'Amy') and (enrollment < 20000)) as R
+    where cName in
+        (select cName
+            from Student natural join Apply natural join College
+            where (sName = 'Irene') and (enrollment < 20000));
+
+# using a subquery, with exists
+
+select *
+    from
+        (select distinct cName from
+            Student natural join Apply natural join College
+            where (sName = 'Amy') and (enrollment < 20000)) as R
+    where exists
+        (select *
+            from Student natural join Apply natural join College
+            where (sName = 'Irene') and (enrollment < 20000) and (R.cName = cName));
 
 exit
