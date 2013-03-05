@@ -63,21 +63,21 @@ x = range(10, 2, -2)
 assert type(x) is list
 assert x       == [10, 8, 6, 4]
 
-x = xrange(11)
+x = xrange(10)
 assert type(x) is xrange
-assert x       != [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-assert x[ 0] ==  0
-assert x[10] == 10
+assert x       != [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+assert x[0] == 0
+assert x[9] == 9
 try :
-    assert x[11] == 11                               # error: out of range
+    assert x[10] == 10                           # error: out of range
     assert False
 except IndexError :
     pass
-#x[0] = 2                                            # TypeError: 'xrange' object does not support item assignment
+#x[0] = 2                                        # TypeError: 'xrange' object does not support item assignment
 s = 0
 for v in x :
     s += v
-assert s == 55
+assert s == 45
 
 x = xrange(15)
 s = 0
@@ -85,13 +85,13 @@ for v in x :
     s += v
     if v == 10 :
         break
-else :                                           # else clause in a for loop
-    assert False                                 # executes when the loop terminates normally
+else :           # else clause in a for loop
+    assert False # executes when the loop terminates normally
 assert s == 55
 
 x = itertools.count(0)            # 0, 1, 2, ...
 assert type(x) is itertools.count
-#assert x[0] == 0                 # TypeError: 'itertools.count' object is unsubscriptable
+#assert x[0] == 0                 # TypeError: 'itertools.count' object is not indexable
 s = 0
 for v in x :
     s += v
