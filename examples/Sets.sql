@@ -79,7 +79,7 @@ project[sID]
 
 # using a subquery, with not in
 
-select sID as name
+select sID
     from Student
     where sID not in
         (select sID

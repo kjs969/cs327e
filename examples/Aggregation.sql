@@ -278,64 +278,64 @@ colleges with fewer than 5 applications
 */
 
 select *
-from Apply
-group by cName
-having count(*) < 5;
+    from Apply
+    group by cName
+    having count(*) < 5;
 
 select cName
-from Apply
-group by cName
-having count(*) < 5;
+    from Apply
+    group by cName
+    having count(*) < 5;
 
 # this is equivalent
 # but with duplicates
 
 select cName
-from Apply as R
-where 5 >
-    (select count(*)
-        from Apply as S
-        where R.cName = S.cName);
+    from Apply as R
+    where 5 >
+        (select count(*)
+            from Apply as S
+            where R.cName = S.cName);
 
 # remove the duplicates
 
 select distinct cName
-from Apply as R
-where 5 >
-    (select count(*)
-        from Apply as S
-        where R.cName = S.cName);
+    from Apply as R
+    where 5 >
+        (select count(*)
+            from Apply as S
+            where R.cName = S.cName);
 
 /* -----------------------------------------------------------------------
 colleges with fewer than 5 applicatants
 */
 
 select *
-from Apply
-group by cName
-having count(distinct sID) < 5;
+    from Apply
+    group by cName
+    having count(distinct sID) < 5;
 
 select cName
-from Apply
-group by cName
-having count(distinct sID) < 5;
+    from Apply
+    group by cName
+    having count(distinct sID) < 5;
 
 /* -----------------------------------------------------------------------
 majors whose applicant's max GPA is less than the average
 */
 
 select *
-from Student natural join Apply
-group by major
-having max(GPA) <
-    (select avg(GPA)
-        from Student);
+    from Student natural join Apply
+    group by major
+    having max(GPA) <
+        (select avg(GPA)
+            from Student);
 
 select major
-from Student natural join Apply
-group by major
-having max(GPA) <
-    (select avg(GPA)
-        from Student);
+    from Student natural join Apply
+    group by major
+    having max(GPA) <
+        (select avg(GPA)
+            from Student);
 
 exit
