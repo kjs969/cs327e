@@ -7,21 +7,33 @@ Student cross Apply
 select *
     from Student cross join Apply;
 
+# select *
+#     from Student, Apply;
+
 /* -----------------------------------------------------------------------
 Student join[Student.sID = Apply.sID] Apply
+Student join                          Apply
 */
 
-select *
-    from Student, Apply
-    where (Student.sID = Apply.sID);
+# select *
+#     from Student, Apply
+#     where (Student.sID = Apply.sID);
 
-select *
-    from Student inner join Apply
-    on (Student.sID = Apply.sID);
+# select *
+#     from Student inner join Apply
+#     on (Student.sID = Apply.sID);
 
-select *
-    from Student inner join Apply
-    using (sID);
+# select *
+#     from Student join Apply
+#     on (Student.sID = Apply.sID);
+
+# select *
+#     from Student inner join Apply
+#     using (sID);
+
+# select *
+#     from Student join Apply
+#     using (sID);
 
 select *
     from Student natural join Apply;
