@@ -4,6 +4,7 @@
         "type":"array",
         "items": {
            "type":"object",
+           "additionalProperties":true,
            "properties": {
               "ISBN": { "type":"string", "pattern":"ISBN*" },
               "Price": { "type":"integer",
@@ -11,14 +12,14 @@
               "Edition": { "type":"integer", "optional": true },
               "Remark": { "type":"string", "optional": true },
               "Title": { "type":"string" },
-              "Authors": { 
+              "Authors": {
                  "type":"array",
                  "minItems":1,
                  "maxItems":10,
                  "items": {
                     "type":"object",
                     "properties": {
-                       "First_Name": { "type":"string" },
+                       "First_Name": { "type":"string", "optional":true },
                        "Last_Name": { "type":"string" }}}}}}},
      "Magazines": {
         "type":"array",
@@ -28,5 +29,5 @@
               "Title": { "type":"string" },
               "Month": { "type":"string",
                          "enum":["January","February"] },
-              "Year": { "type":"integer" }}}}
+              "Year": { "type":["integer", "string"] }}}}
 }}
