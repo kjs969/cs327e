@@ -86,17 +86,23 @@ b = tuple(a)
 assert a is b
 
 a = 2 * [[2, 3, 4]]
-assert a is not [[2, 3, 4], [2, 3, 4]]
-assert a ==     [[2, 3, 4], [2, 3, 4]]
-assert a[0] is a[1]
+assert a    is not [[2, 3, 4], [2, 3, 4]]
+assert a    ==     [[2, 3, 4], [2, 3, 4]]
+assert a[0] is     a[1]
+a[0] += [5]
+assert a    is not [[2, 3, 4, 5], [2, 3, 4, 5]]
+assert a    ==     [[2, 3, 4, 5], [2, 3, 4, 5]]
+assert a[0] is     a[1]
 
 a = [2, 3, 4]
 b = (a,)
 assert b is not ([2, 3, 4],)
 assert b ==     ([2, 3, 4],)
+assert a is     b[0]
 a += [5]
 assert b is not ([2, 3, 4, 5],)
 assert b ==     ([2, 3, 4, 5],)
+assert a is     b[0]
 
 a    = [1, 3, 5, 7, 9]
 a[2] = 0
