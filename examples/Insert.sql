@@ -6,7 +6,7 @@ Insert
 
 insert into Student values (123, 'Amy',    3.9,  1000);
 insert into Student values (234, 'Bob',    3.6,  1500);
-insert into Student values (321, 'Lori',   null, 2500);
+insert into Student values (320, 'Lori',   null, 2500);
 insert into Student values (345, 'Craig',  3.5,   500);
 insert into Student values (432, 'Kevin',  null, 1500);
 insert into Student values (456, 'Doris',  3.9,  1000);
@@ -24,6 +24,8 @@ insert into Apply values (123, 'Cornell',  'EE',             true);
 insert into Apply values (123, 'Stanford', 'CS',             true);
 insert into Apply values (123, 'Stanford', 'EE',             false);
 insert into Apply values (234, 'Berkeley', 'biology',        false);
+insert into Apply values (321, 'MIT',      'history',        false);
+insert into Apply values (321, 'MIT',      'psychology',     true);
 insert into Apply values (345, 'Cornell',  'bioengineering', false);
 insert into Apply values (345, 'Cornell',  'CS',             true);
 insert into Apply values (345, 'Cornell',  'EE',             false);

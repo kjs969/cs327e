@@ -55,7 +55,7 @@ def select (a, f) :
             x.append(v)
     return x
 
-def project (a, b) :
+def project (a, *b) :
     x = []
     for v in a :
         y = {}
@@ -75,7 +75,7 @@ y = [
     students[10]]
 assert x == y
 
-x = project(x, ["sID", "sName"])
+x = project(x, "sID", "sName")
 y = [
     {"sID" : students[ 0]["sID"], "sName" : students[ 0]["sName"]},
     {"sID" : students[ 3]["sID"], "sName" : students[ 3]["sName"]},

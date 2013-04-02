@@ -17,15 +17,15 @@ Student join                          Apply
 
 # select *
 #     from Student, Apply
-#     where (Student.sID = Apply.sID);
+#     where Student.sID = Apply.sID;
 
 # select *
 #     from Student inner join Apply
-#     on (Student.sID = Apply.sID);
+#     on Student.sID = Apply.sID;
 
 # select *
 #     from Student join Apply
-#     on (Student.sID = Apply.sID);
+#     on Student.sID = Apply.sID;
 
 # select *
 #     from Student inner join Apply
