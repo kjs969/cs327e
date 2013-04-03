@@ -16,12 +16,14 @@ lowest GPA of students applying to CS
 */
 
 select *
-    from Student natural join Apply
+    from Student inner join Apply
+    using (sID)
     where major = 'CS'
     order by GPA;
 
 select min(GPA)
-    from Student natural join Apply
+    from Student inner join Apply
+    using (sID)
     where major = 'CS';
 
 /* -----------------------------------------------------------------------
@@ -32,12 +34,14 @@ average GPA of students applying to CS
 # because of duplicates
 
 select *
-    from Student natural join Apply
+    from Student inner join Apply
+    using (sID)
     where major = 'CS'
     order by GPA;
 
 select avg(GPA)
-    from Student natural join Apply
+    from Student inner join Apply
+    using (sID)
     where major = 'CS';
 
 # this is right
@@ -151,40 +155,6 @@ select R.x - S.y
                     from Apply
                         where major = 'CS')) as S;
 
-# using subquery in select
-
-select
-    (select avg(GPA) as x
-        from Student
-        where sID in
-            (select sID
-                from Apply
-                    where major = 'CS'))
-    -
-    (select avg(GPA) as y
-        from Student
-        where sID not in
-            (select sID
-                from Apply
-                    where major = 'CS')) as S
-    from Student;
-
-select distinct
-    (select avg(GPA) as x
-        from Student
-        where sID in
-            (select sID
-                from Apply
-                    where major = 'CS'))
-    -
-    (select avg(GPA) as y
-        from Student
-        where sID not in
-            (select sID
-                from Apply
-                    where major = 'CS')) as S
-    from Student;
-
 /* -----------------------------------------------------------------------
 number of applicants to each college
 */
@@ -231,10 +201,11 @@ select cName, major, min(GPA), max(GPA)
 spread between min and max GPA of applicants to each college and major
 */
 
-select y - x
+select cName, major, y - x
     from
         (select cName, major, min(GPA) as x, max(GPA) as y
-            from Student natural join Apply
+            from Student inner join Apply
+            using (sID)
             group by cName, major) as T;
 
 /* -----------------------------------------------------------------------
@@ -244,7 +215,8 @@ max spread between min and max GPA of applicants to each college and major
 select max(y - x)
     from
         (select cName, major, min(GPA) as x, max(GPA) as y
-            from Student natural join Apply
+            from Student inner join Apply
+            using (sID)
             group by cName, major) as T;
 
 /* -----------------------------------------------------------------------
@@ -254,18 +226,21 @@ number of colleges applied to by each student
 # does not include student who did not apply anywhere
 
 select *
-    from Student natural join Apply
-    order by Student.sID, cName;
+    from Student inner join Apply
+    using (sID)
+    order by sID, cName;
 
-select Student.sID, count(distinct cName)
-    from Student natural join Apply
-    group by Student.sID;
+select sID, sName, count(distinct cName)
+    from Student inner join Apply
+    using (sID)
+    group by sID;
 
-# does not include student who did not apply anywhere
+# does include student who did not apply anywhere
 
-select Student.sID, count(distinct cName)
-    from Student natural join Apply
-    group by Student.sID
+select sID, count(distinct cName)
+    from Student inner join Apply
+    using (sID)
+    group by sID
 union
 select sID, 0
     from Student
@@ -325,16 +300,22 @@ majors whose applicant's max GPA is less than the average
 */
 
 select *
-    from Student natural join Apply
+    from Student inner join Apply
+    using (sID)
     group by major
-    having max(GPA) <
+    having
+        max(GPA)
+        <
         (select avg(GPA)
             from Student);
 
 select major
-    from Student natural join Apply
+    from Student inner join Apply
+    using (sID)
     group by major
-    having max(GPA) <
+    having
+        max(GPA)
+        <
         (select avg(GPA)
             from Student);
 
