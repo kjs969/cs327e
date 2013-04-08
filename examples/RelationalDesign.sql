@@ -79,6 +79,91 @@ drop table if exists Apply;
 drop table if exists HighSchool;
 
 /* -----------------------------------------------------------------------
+1st Normal Form
+Each column must be atomic.
+*/
+
+drop table if exists Apply;
+
+create table Apply (
+    SSN    int,
+    sName  text,
+    cNames text);
+
+insert into Apply values (123, 'Ann', 'Berkeley, MIT, Stanford');
+insert into Apply values (456, 'Bob', 'MIT');
+
+drop table if exists Apply;
+
+/* -----------------------------------------------------------------------
+1st Normal Form
+No repeating columns with associated data.
+*/
+
+drop table if exists Apply;
+
+create table Apply (
+    SSN    int,
+    sName  text,
+    cName1 text,
+    cName2 text,
+    cName3 test);
+
+insert into Apply values (123, 'Ann', 'Berkeley', 'MIT', 'Stanford');
+insert into Apply values (456, 'Bob', 'MIT',      null,   null);
+
+drop table if exists Apply;
+
+/* -----------------------------------------------------------------------
+2nd Normal Form
+Every non-key column is independent of every other non-key column.
+*/
+
+drop table if exists Apply;
+
+create table Apply (
+    SSN    int,
+    sName  text,
+    cName  text,
+    cState char(2));
+
+insert into Apply values (123, 'Ann', 'Berkeley', 'CA');
+insert into Apply values (123, 'Ann', 'MIT',      'MA');
+insert into Apply values (123, 'Ann', 'Stanford', 'CA');
+insert into Apply values (456, 'Bob', 'MIT',      'MA');
+
+drop table if exists Apply;
+
+/* -----------------------------------------------------------------------
+2nd Normal Form
+Every non-key column is independent of every other non-key column.
+*/
+
+drop table if exists Apply;
+drop table if exists College;
+
+create table Apply (
+    SSN    int,
+    sName  text,
+    cName  text);
+
+create table College (
+    cName  text,
+    cState char(2));
+
+insert into Apply values (123, 'Ann', 'Berkeley');
+insert into Apply values (123, 'Ann', 'MIT');
+insert into Apply values (123, 'Ann', 'Stanford');
+insert into Apply values (456, 'Bob', 'MIT');
+
+insert into College values ('Berkeley', 'CA');
+insert into College values ('MIT',      'MA');
+
+drop table if exists Apply;
+drop table if exists College;
+
+/* -----------------------------------------------------------------------
+3rd Normal Form
 Boyce-Codd Normal Form: BCNF
 Functional Dependencies
 SSN -> sName
@@ -99,6 +184,7 @@ insert into Apply values (456, 'Bob', 'MIT');
 drop table if exists Apply;
 
 /* -----------------------------------------------------------------------
+3rd Normal Form
 BCNF
 No Functional Dependencies
 */
