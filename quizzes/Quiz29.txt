@@ -10,8 +10,10 @@ CS327e: Quiz #29 (5 pts)
 
 a. Took(sID, name, courseNum, title, year, grade)
 b. Course(courseNum, title, year), Took(sID, courseNum, grade)
-c. Student(sID, name), Course(courseNum, title), Took(sID, courseNum, year, grade)
-d. Student(sID, name), Course(courseNum, title), Took(name, title, year, grade)
+c. Student(sID, name), Course(courseNum, title),
+   Took(sID, courseNum, year, grade)
+d. Student(sID, name), Course(courseNum, title),
+   Took(name, title, year, grade)
 
 c.
 
