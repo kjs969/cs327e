@@ -1,0 +1,31 @@
+CS327e: Quiz #29 (5 pts)
+
+--------------------------------------------------------------------------
+1. Consider a database containing information about courses taken by
+   students. Students have a unique student ID and (possibly not unique)
+   name; courses have a unique course number and (possibly not unique)
+   title; students take a course in a given year and receive a grade.
+   Which of the following schemas would you recommend?
+   (2 pts)
+
+a. Took(sID, name, courseNum, title, year, grade)
+b. Course(courseNum, title, year), Took(sID, courseNum, grade)
+c. Student(sID, name), Course(courseNum, title), Took(sID, courseNum, year, grade)
+d. Student(sID, name), Course(courseNum, title), Took(name, title, year, grade)
+
+c.
+
+--------------------------------------------------------------------------
+2. Consider the relation Took(sID, name, courseNum, title). Students
+   have a unique student ID and (possibly not unique) name; courses have a
+   unique course number and (possibly not unique) title. Each tuple in the
+   relation encodes the fact that the given student took the given course.
+   What are all of the functional dependencies for relation Took?
+   (2 pts)
+
+a. sID -> courseNum
+b. sID -> name, courseNum -> title
+c. name -> sID, title -> courseNum
+d. courseNum -> sID
+
+b.
