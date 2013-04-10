@@ -7,7 +7,7 @@ create table Apply   (sID   int,  cName text,    major      text,  decision bool
 create table College (cName text, state char(2), enrollment int);
 
 /* -----------------------------------------------------------------------
-1. Write a query to obtain number of applicants to each college.
+1. Write a query to obtain number of students who applied to each college.
    (4 pts)
 */
 
