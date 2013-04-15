@@ -48,7 +48,7 @@ c. S2 = {ABC -> D, D -> B}
 d. S2 = {ADE -> BC}
 
 --------------------------------------------------------------------------
-1. Consider relation R(A,B,C,D,E) with functional dependencies:
+5. Consider relation R(A,B,C,D,E) with functional dependencies:
 
 AB -> C, C -> D, BD -> E
 
@@ -61,7 +61,7 @@ c. BC
 d. AD
 
 --------------------------------------------------------------------------
-2. Consider relation R(A,B,C,D,E) with functional dependencies:
+6. Consider relation R(A,B,C,D,E) with functional dependencies:
 
 D -> C, CE -> A, D -> A, AE -> D
 
@@ -73,7 +73,7 @@ c. BD
 d. CDE
 
 --------------------------------------------------------------------------
-3. Let relation R(A,B,C,D,E,F,G,H) satisfy the following functional
+7. Let relation R(A,B,C,D,E,F,G,H) satisfy the following functional
 dependencies:
 
 A -> B, CH -> A, B -> E, BD -> C, EG -> H, DE -> F
@@ -86,7 +86,7 @@ c. BED -> CF
 d. BFG -> AE
 
 --------------------------------------------------------------------------
-4. Consider relation R(A,B,C,D,E,F) with functional dependencies:
+8. Consider relation R(A,B,C,D,E,F) with functional dependencies:
 
 CDE -> B, ACD -> F, BEF -> C, B -> D
 
@@ -98,7 +98,7 @@ c. ABDF
 d. BDF
 
 --------------------------------------------------------------------------
-5. Consider relation R(A,B,C,D,E,F,G) with functional dependencies:
+9. Consider relation R(A,B,C,D,E,F,G) with functional dependencies:
 
 AB -> C, CD -> E, EF -> G, FG -> E, DE -> C, and BC -> A
 
@@ -110,7 +110,7 @@ c. BCDF
 d. BCDE
 
 --------------------------------------------------------------------------
-6. Let relation R(A,B,C,D,E) satisfy the following functional
+10. Let relation R(A,B,C,D,E) satisfy the following functional
 dependencies:
 
 AB -> C, BC -> D, CD -> E, DE -> A, AE -> B
@@ -123,7 +123,7 @@ c. A -> B
 d. AD -> B
 
 --------------------------------------------------------------------------
-7. Let relation R(A,B,C,D) satisfy the following functional dependencies:
+11. Let relation R(A,B,C,D) satisfy the following functional dependencies:
 
 A -> B, B -> C, C -> A
 
@@ -137,7 +137,7 @@ c. A -> B, B -> A, B -> C
 d. A -> BC, B - AC
 
 --------------------------------------------------------------------------
-8. Suppose relation R(A,B,C) currently has only the tuple (0,0,0), and
+12. Suppose relation R(A,B,C) currently has only the tuple (0,0,0), and
 it must always satisfy the functional dependencies A -> B and B -> C.
 Which of the following tuples may be inserted into R legally?
 
