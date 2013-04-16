@@ -12,6 +12,8 @@ b. 9
 c. 3
 d. 81
 
+a.
+
 --------------------------------------------------------------------------
 2. For the relation Apply(SSN,cName,state,date,major), what real-world
 constraint is captured by SSN,cName -> date?
@@ -21,6 +23,8 @@ b. A student can apply to each college only once.
 c. A student must apply to all colleges on the same date.
 d. Every application from a student to a specific college must be on the
 same date.
+
+d.
 
 --------------------------------------------------------------------------
 3. Consider the relation R(A,B,C,D,E) and suppose we have the functional
@@ -37,6 +41,8 @@ b. AC
 c. AD
 d. AE
 
+d.
+
 --------------------------------------------------------------------------
 4. Consider the relation R(A,B,C,D,E) and the set of functional
 dependencies S1 = {AB -> C, AE -> D, D -> B}. Which of the following sets
@@ -46,6 +52,8 @@ a. S2 = {AD -> C}
 b. S2 = {AD -> C, AE -> B}
 c. S2 = {ABC -> D, D -> B}
 d. S2 = {ADE -> BC}
+
+c.
 
 --------------------------------------------------------------------------
 5. Consider relation R(A,B,C,D,E) with functional dependencies:
@@ -60,6 +68,8 @@ b. AB
 c. BC
 d. AD
 
+d.
+
 --------------------------------------------------------------------------
 6. Consider relation R(A,B,C,D,E) with functional dependencies:
 
@@ -71,6 +81,8 @@ a. CE
 b. BDE
 c. BD
 d. CDE
+
+b.
 
 --------------------------------------------------------------------------
 7. Let relation R(A,B,C,D,E,F,G,H) satisfy the following functional
@@ -85,6 +97,8 @@ b. ADE -> CH
 c. BED -> CF
 d. BFG -> AE
 
+c.
+
 --------------------------------------------------------------------------
 8. Consider relation R(A,B,C,D,E,F) with functional dependencies:
 
@@ -97,6 +111,8 @@ b. ACDE
 c. ABDF
 d. BDF
 
+b.
+
 --------------------------------------------------------------------------
 9. Consider relation R(A,B,C,D,E,F,G) with functional dependencies:
 
@@ -105,9 +121,11 @@ AB -> C, CD -> E, EF -> G, FG -> E, DE -> C, and BC -> A
 Which of the following is a key?
 
 a. ADFG
-b. BDFG
+b. BDEG
 c. BCDF
 d. BCDE
+
+c.
 
 --------------------------------------------------------------------------
 10. Let relation R(A,B,C,D,E) satisfy the following functional
