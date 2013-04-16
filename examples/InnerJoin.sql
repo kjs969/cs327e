@@ -77,136 +77,92 @@ insert into College values ('MIT',      'MA', 10000);
 insert into College values ('Stanford', 'CA', 15000);
 
 /* -----------------------------------------------------------------------
-applications of students who applied to Carnegie Melon with a GPA < 3.6
+Student cross Apply
 */
 
 select *
-    from Apply
-    where
-        (cName = 'Carnegie Mellon')
-        and
-        sID in
-            (select sID
-                from Student
-                where GPA < 3.6);
+    from Student cross join Apply;
+
+# select *
+#     from Student, Apply;
 
 /* -----------------------------------------------------------------------
-change those applications from CS to economics
+Student join[Student.sID = Apply.sID] Apply
+Student join                          Apply
 */
 
-select *
-    from Apply
-    order by sID;
+# select *
+#     from Student, Apply
+#     where Student.sID = Apply.sID;
 
-update Apply
-    set decision = true, major = 'economics'
-    where
-        (cName = 'Carnegie Mellon')
-        and
-        sID in
-            (select sID
-                from Student
-                where GPA < 3.6);
+# select *
+#     from Student inner join Apply
+#     on Student.sID = Apply.sID;
+
+# select *
+#     from Student join Apply
+#     on Student.sID = Apply.sID;
+
+# select *
+#     from Student inner join Apply
+#     using (sID);
+
+# select *
+#     from Student join Apply
+#     using (sID);
 
 select *
-    from Apply
-    order by sID;
+    from Student natural join Apply;
 
 /* -----------------------------------------------------------------------
-applications of students with the highest GPA who applied to EE
+name and GPA of students
+   with high school size > 1000,
+   with major            = CS,
+   with decision         = false
+
+project[sName, GPA]
+    (select[(sizeHS > 1000)     and
+            (major = 'CS')      and
+            (decision = false)]
+        (Student join Apply))
 */
 
 select *
-    from Apply
-    where
-        (major = 'EE')
-        and
-        sID in
-            (select sID
-                from Student
-                where GPA >= all
-                    (select GPA
-                        from Student
-                        where sID in
-                            (select sID
-                                from Apply
-                                where major = 'EE')));
+    from Student natural join Apply
+    where (sizeHS > 1000) and (major = 'CS') and (decision = false);
+
+select sName, GPA
+    from Student natural join Apply
+    where (sizeHS > 1000) and (major = 'CS') and (decision = false);
 
 /* -----------------------------------------------------------------------
-change those applications from EE to CS
+name and GPA of students with
+   with high school size > 500,
+   with major            = CS,
+   with decision         = false,
+   with enrollment       > 20000
+
+project[sName, GPA]
+    (select[(sizeHS > 500)       and
+           (major = 'CS')        and
+           (decision = false)    and
+           (enrollment > 20000)]
+        (Student join Apply join College))
 */
 
 select *
-    from Apply
-    order by sID;
+    from Student natural join Apply natural join College
+    where (sizeHS     > 500)   and
+          (major      = 'CS')  and
+          (decision   = true)  and
+          (enrollment > 20000);
 
-create temporary table T as
-    select major
-        from Apply
-        where
-            (major = 'EE')
-            and
-            sID in
-                (select sID
-                    from Student
-                    where GPA >= all
-                        (select GPA
-                            from Student
-                            where sID in
-                                (select sID
-                                    from Apply
-                                    where major = 'EE')));
-update Apply
-    set major = 'CSE'
-    where major in
-        (select *
-            from T);
-
-select *
-    from Apply
-    order by sID;
-
-/* -----------------------------------------------------------------------
-change every student to have the highest GPA and smalles school size
-*/
-
-select *
-    from Student
-    order by sID;
-
-create temporary table R as
-    select max(GPA)
-        from Student;
-create temporary table S as
-    select min(sizeHS)
-        from Student;
-update Student
-    set
-        GPA =
-            (select *
-                from R),
-        sizeHS =
-            (select *
-                from S);
-
-select *
-    from Student
-    order by sID;
-
-/* -----------------------------------------------------------------------
-accept all students
-*/
-
-select *
-    from Apply
-    order by sID;
-
-update Apply
-    set decision = true;
-
-select *
-    from Apply
-    order by sID;
+select sName, GPA
+    from Student natural join Apply natural join College
+    where (sizeHS     > 500)   and
+          (major      = 'CS')  and
+          (decision   = true)  and
+          (enrollment > 20000);
 
 /* -----------------------------------------------------------------------
 Drop
