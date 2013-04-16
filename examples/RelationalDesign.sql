@@ -107,7 +107,7 @@ create table Apply (
     sName  text,
     cName1 text,
     cName2 text,
-    cName3 test);
+    cName3 text);
 
 insert into Apply values (123, 'Ann', 'Berkeley', 'MIT', 'Stanford');
 insert into Apply values (456, 'Bob', 'MIT',      null,   null);
