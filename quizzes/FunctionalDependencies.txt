@@ -140,6 +140,8 @@ b. AC -> B
 c. A -> B
 d. AD -> B
 
+a.
+
 --------------------------------------------------------------------------
 11. Let relation R(A,B,C,D) satisfy the following functional dependencies:
 
@@ -154,6 +156,8 @@ b. B -> AC, C -> AB
 c. A -> B, B -> A, B -> C
 d. A -> BC, B - AC
 
+a.
+
 --------------------------------------------------------------------------
 12. Suppose relation R(A,B,C) currently has only the tuple (0,0,0), and
 it must always satisfy the functional dependencies A -> B and B -> C.
@@ -163,3 +167,5 @@ a. (0, 1, 0)
 b. (0, 0, 2)
 c. (1, 1, 0)
 d. (1, 0, 2)
+
+c.

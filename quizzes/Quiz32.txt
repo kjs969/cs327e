@@ -1,0 +1,26 @@
+CS327e: Quiz #32 (5 pts)
+
+--------------------------------------------------------------------------
+1. Consider a relation R(A,B,C,D) with functional dependencies:
+
+   A,B -> C
+   C,D -> E
+
+   Suppose there are at most 2 different values for each of A, B, and D.
+   What's the maximum number of different values for E?
+   (2 pts)
+
+8
+
+--------------------------------------------------------------------------
+2. Consider the relation R(A,B,C,D,E) and suppose we have the functional
+   dependencies:
+
+   AB -> C
+   AE -> D
+   D -> B
+
+   What is an attribute pair that is a key for R?
+   (2 pts)
+
+AE
