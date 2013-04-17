@@ -77,13 +77,18 @@ insert into College values ('MIT',      'MA', 10000);
 insert into College values ('Stanford', 'CA', 15000);
 
 /* -----------------------------------------------------------------------
-applications of students who applied to Carnegie Melon with a GPA < 3.6
+applications of students who applied to Cornell with a GPA < 3.6
 */
+
+select *
+    from Student inner join Apply
+    using (sID)
+    where (cName = 'Cornell') and (GPA < 3.6);
 
 select *
     from Apply
     where
-        (cName = 'Carnegie Mellon')
+        (cName = 'Cornell')
         and
         sID in
             (select sID
@@ -91,17 +96,13 @@ select *
                 where GPA < 3.6);
 
 /* -----------------------------------------------------------------------
-change those applications from CS to economics
+change those applications from CS to economics and have them accepted
 */
 
-select *
-    from Apply
-    order by sID;
-
 update Apply
-    set decision = true, major = 'economics'
+    set major = 'economics', decision = true
     where
-        (cName = 'Carnegie Mellon')
+        (cName = 'Cornell')
         and
         sID in
             (select sID
@@ -109,12 +110,29 @@ update Apply
                 where GPA < 3.6);
 
 select *
+    from Student inner join Apply
+    using (sID)
+    where (cName = 'Cornell') and (GPA < 3.6);
+
+select *
     from Apply
-    order by sID;
+    where
+        (cName = 'Cornell')
+        and
+        sID in
+            (select sID
+                from Student
+                where GPA < 3.6);
 
 /* -----------------------------------------------------------------------
 applications of students with the highest GPA who applied to EE
 */
+
+select *
+    from Student inner join Apply
+    using (sID)
+    where major = 'EE'
+    order by GPA desc;
 
 select *
     from Apply
@@ -136,38 +154,40 @@ select *
 change those applications from EE to CS
 */
 
-select *
-    from Apply
-    order by sID;
-
 create temporary table T as
-    select major
-        from Apply
-        where
-            (major = 'EE')
-            and
-            sID in
-                (select sID
-                    from Student
-                    where GPA >= all
-                        (select GPA
-                            from Student
-                            where sID in
-                                (select sID
-                                    from Apply
-                                    where major = 'EE')));
+    (select sID
+        from Student
+        where GPA >= all
+            (select GPA
+                from Student
+                where sID in
+                    (select sID
+                        from Apply
+                        where major = 'EE')));
+
 update Apply
     set major = 'CSE'
-    where major in
-        (select *
-            from T);
+    where
+        (major = 'EE')
+        and
+        sID in
+            (select *
+                from T);
 
 select *
-    from Apply
-    order by sID;
+    from Student inner join Apply
+    using (sID)
+    where major = 'CSE'
+    order by GPA desc;
+
+select *
+    from Student inner join Apply
+    using (sID)
+    where major = 'EE'
+    order by GPA desc;
 
 /* -----------------------------------------------------------------------
-change every student to have the highest GPA and smalles school size
+change every student to have the highest GPA and smallest school size
 */
 
 select *
