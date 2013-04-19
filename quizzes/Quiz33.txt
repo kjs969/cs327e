@@ -1,0 +1,14 @@
+CS327e: Quiz #33 (5 pts)
+
+--------------------------------------------------------------------------
+1. Suppose relation R(A,B,C) currently has only the tuple (0,0,0), and
+   it must always satisfy the functional dependencies A -> B and B -> C.
+   Which of the following tuples may be inserted into R legally?
+   (4 pts)
+
+a. (0, 1, 0)
+b. (0, 0, 2)
+c. (1, 1, 0)
+d. (1, 0, 2)
+
+c.
