@@ -29,10 +29,11 @@ turnin-verify:
 	turnin --verify hychyc07 cs327epj5
 
 zip:
-	zip -r WCDB3.zip makefile                           \
-	RunWCDB3.in.xml RunWCDB3.py RunWCDB3.out.xml        \
-	TestWCDB3.py TestWCDB3.out                          \
-	WCDB3.html WCDB3.log WCDB3.py WCDB3p.pdf WCDB3u.pdf
+	zip -r WCDB3.zip makefile                    \
+	RunWCDB3.in.xml RunWCDB3.py RunWCDB3.out.xml \
+	TestWCDB3.py TestWCDB3.out                   \
+	WCDB3d.html WCDB3q.html WCDB3.log WCDB3.py   \
+	WCDB3p.pdf WCDB3u.pdf WCDB3q.sql
 
 clean:
 	rm -f *.pyc

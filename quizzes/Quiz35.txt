@@ -1,0 +1,25 @@
+CS327e: Quiz #35 (5 pts)
+
+--------------------------------------------------------------------------
+1. Here is an instance of a relation R(A,B,C,D):
+   (4 pts)
+
+A	B	C	D
+1	2	3	7
+1	2	3	8
+4	2	5	7
+4	2	5	8
+
+Consider the following three multivalued dependencies:
+(1) AB ->> C, (2) CD ->> A, (3) D ->> C
+
+The following (M,n) pairs say that to satisfy multivalued dependency M
+(M=1, M=2, or M=3), a minimum of n tuples must be added to the given
+instance of R. Only one such pair is correct; which one?
+
+a. (2,4)
+b. (1,3)
+c. (1,0)
+d. (3,3)
+
+c.
